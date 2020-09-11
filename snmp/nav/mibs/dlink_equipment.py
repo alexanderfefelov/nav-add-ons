@@ -1,8 +1,8 @@
-from twisted.internet import defer
 from nav.mibs import reduce_index
 from nav.mibs.mibretriever import MibRetriever
 from nav.models.manage import Sensor
 from nav.smidumps import get_mib
+from twisted.internet import defer
 
 
 class DLinkEquipmentMib(MibRetriever):
