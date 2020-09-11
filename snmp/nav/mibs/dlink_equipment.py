@@ -32,12 +32,11 @@ class DLinkEquipmentMib(MibRetriever):
 
     def _get_fan_sensors(self, data):
         result = []
+        module_name = self.get_module_name()
         for idx, obj in data.items():
             unit_index = obj.get('swFanUnitIndex')
             fan_id = obj.get('swFanID')
             fan_number = obj.get('swFanNumber')
-
-            module_name = self.get_module_name()
             oid = str(self.nodes['swFanSpeed'].oid) + str(obj.get(0, None))
             internal_name = 'swFanSpeed.{}/{}/{}'.format(str(unit_index), str(fan_id), str(fan_number))
             description = 'Fan {}/{}/{} work speed'.format(str(unit_index), str(fan_id), str(fan_number))
@@ -63,10 +62,9 @@ class DLinkEquipmentMib(MibRetriever):
 
     def _get_temperature_sensors(self, data):
         result = []
+        module_name = self.get_module_name()
         for idx, obj in data.items():
             unit_index = obj.get('swTemperatureUnitIndex')
-
-            module_name = self.get_module_name()
             oid = str(self.nodes['swTemperatureCurrent'].oid) + str(obj.get(0, None))
             internal_name = 'swTemperatureCurrent.{}'.format(str(unit_index))
             description = 'Temperature {}'.format(str(unit_index))
