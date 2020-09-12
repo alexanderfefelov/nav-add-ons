@@ -24,6 +24,7 @@ class DLinkEquipmentMib(MibRetriever):
             'swFanUnitIndex',
             'swFanID',
             'swFanNumber',
+            'swFanStatus'
             'swFanSpeed'
         ])
         result.addCallback(reduce_index)
@@ -36,6 +37,7 @@ class DLinkEquipmentMib(MibRetriever):
             unit_index = item.get('swFanUnitIndex')
             fan_id = item.get('swFanID')
             fan_number = item.get('swFanNumber')
+
             oid = str(self.nodes['swFanSpeed'].oid) + str(item.get(0, None))
             internal_name = 'swFanSpeed.{}/{}/{}'.format(str(unit_index), str(fan_id), str(fan_number))
             description = 'Fan {}/{}/{} work speed'.format(str(unit_index), str(fan_id), str(fan_number))
@@ -46,6 +48,20 @@ class DLinkEquipmentMib(MibRetriever):
                 internal_name=internal_name,
                 description=description,
                 unit_of_measurement=Sensor.UNIT_RPM,
+                precision=0,
+                scale=None
+            ))
+
+            oid = str(self.nodes['swFanStatus'].oid) + str(item.get(0, None))
+            internal_name = 'swFanStatus.{}/{}/{}'.format(str(unit_index), str(fan_id), str(fan_number))
+            description = 'Fan {}/{}/{} status'.format(str(unit_index), str(fan_id), str(fan_number))
+            result.append(dict(
+                mib=module_name,
+                oid=oid,
+                name=internal_name,
+                internal_name=internal_name,
+                description=description,
+                unit_of_measurement=Sensor.UNIT_UNKNOWN,
                 precision=0,
                 scale=None
             ))
