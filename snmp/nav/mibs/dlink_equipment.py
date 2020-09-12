@@ -6,7 +6,6 @@ from twisted.internet import defer
 
 
 class DLinkEquipmentMib(MibRetriever):
-
     mib = get_mib('D_Link_Equipment_mib')
 
     @defer.inlineCallbacks
@@ -33,11 +32,11 @@ class DLinkEquipmentMib(MibRetriever):
     def _get_fan_sensors(self, data):
         result = []
         module_name = self.get_module_name()
-        for idx, obj in data.items():
-            unit_index = obj.get('swFanUnitIndex')
-            fan_id = obj.get('swFanID')
-            fan_number = obj.get('swFanNumber')
-            oid = str(self.nodes['swFanSpeed'].oid) + str(obj.get(0, None))
+        for _, item in data.items():
+            unit_index = item.get('swFanUnitIndex')
+            fan_id = item.get('swFanID')
+            fan_number = item.get('swFanNumber')
+            oid = str(self.nodes['swFanSpeed'].oid) + str(item.get(0, None))
             internal_name = 'swFanSpeed.{}/{}/{}'.format(str(unit_index), str(fan_id), str(fan_number))
             description = 'Fan {}/{}/{} work speed'.format(str(unit_index), str(fan_id), str(fan_number))
             result.append(dict(
@@ -63,9 +62,9 @@ class DLinkEquipmentMib(MibRetriever):
     def _get_temperature_sensors(self, data):
         result = []
         module_name = self.get_module_name()
-        for idx, obj in data.items():
-            unit_index = obj.get('swTemperatureUnitIndex')
-            oid = str(self.nodes['swTemperatureCurrent'].oid) + str(obj.get(0, None))
+        for _, item in data.items():
+            unit_index = item.get('swTemperatureUnitIndex')
+            oid = str(self.nodes['swTemperatureCurrent'].oid) + str(item.get(0, None))
             internal_name = 'swTemperatureCurrent.{}'.format(str(unit_index))
             description = 'Temperature {}'.format(str(unit_index))
             result.append(dict(

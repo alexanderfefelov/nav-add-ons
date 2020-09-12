@@ -6,7 +6,6 @@ from twisted.internet import defer
 
 
 class DLinkDdmMib(MibRetriever):
-
     mib = get_mib('D_Link_DDM_mib')
 
     @defer.inlineCallbacks
@@ -33,12 +32,12 @@ class DLinkDdmMib(MibRetriever):
     def _get_ddm_sensors(self, data):
         result = []
         module_name = self.get_module_name()
-        for idx, obj in data.items():
-            if obj.get('swDdmPortState', None) == 1:
-                port = obj.get('swDdmPort')
+        for _, item in data.items():
+            if item.get('swDdmPortState', None) == 1:
+                port = str(item.get('swDdmPort'))
 
-                oid = str(self.nodes['swDdmRxPower'].oid) + str(obj.get(0, None))
-                internal_name = 'swDdmRxPower.{}'.format(str(port))
+                oid = str(self.nodes['swDdmRxPower'].oid) + port
+                internal_name = 'swDdmRxPower.{}'.format(port)
                 description = internal_name
                 result.append(dict(
                     mib=module_name,
@@ -51,8 +50,8 @@ class DLinkDdmMib(MibRetriever):
                     scale=None
                 ))
 
-                oid = str(self.nodes['swDdmTxPower'].oid) + str(obj.get(0, None))
-                internal_name = 'swDdmTxPower.{}'.format(str(port))
+                oid = str(self.nodes['swDdmTxPower'].oid) + port
+                internal_name = 'swDdmTxPower.{}'.format(port)
                 description = internal_name
                 result.append(dict(
                     mib=module_name,
@@ -65,8 +64,8 @@ class DLinkDdmMib(MibRetriever):
                     scale=None
                 ))
 
-                oid = str(self.nodes['swDdmVoltage'].oid) + str(obj.get(0, None))
-                internal_name = 'swDdmVoltage.{}'.format(str(port))
+                oid = str(self.nodes['swDdmVoltage'].oid) + port
+                internal_name = 'swDdmVoltage.{}'.format(port)
                 description = internal_name
                 result.append(dict(
                     mib=module_name,
@@ -79,8 +78,8 @@ class DLinkDdmMib(MibRetriever):
                     scale=None
                 ))
 
-                oid = str(self.nodes['swDdmTemperature'].oid) + str(obj.get(0, None))
-                internal_name = 'swDdmTemperature.{}'.format(str(port))
+                oid = str(self.nodes['swDdmTemperature'].oid) + port
+                internal_name = 'swDdmTemperature.{}'.format(port)
                 description = internal_name
                 result.append(dict(
                     mib=module_name,
@@ -93,8 +92,8 @@ class DLinkDdmMib(MibRetriever):
                     scale=None
                 ))
 
-                oid = str(self.nodes['swDdmBiasCurrent'].oid) + str(obj.get(0, None))
-                internal_name = 'swDdmBiasCurrent.{}'.format(str(port))
+                oid = str(self.nodes['swDdmBiasCurrent'].oid) + port
+                internal_name = 'swDdmBiasCurrent.{}'.format(port)
                 description = internal_name
                 result.append(dict(
                     mib=module_name,

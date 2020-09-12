@@ -4,7 +4,6 @@ from twisted.internet import defer
 
 
 class DLinkGenmgmtMib(MibRetriever):
-
     mib = get_mib('D_Link_Genmgmt_mib')
 
     @defer.inlineCallbacks

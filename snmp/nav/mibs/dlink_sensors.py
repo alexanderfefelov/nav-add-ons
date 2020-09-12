@@ -6,7 +6,6 @@ from twisted.internet import defer
 
 
 class DLinkSensorsMib(MibRetriever):
-
     mib = get_mib('ENTITY-MIB')  # TODO FIXME Hack the "No known MIB implementation" error
 
     def __init__(self, agent_proxy):
