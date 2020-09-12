@@ -42878,7 +42878,7 @@ in the device .""",
             "default" : "disabled",
             "description" :
                 """According to IEEE 802.1ag, a Bridge replies with one LTR to an LTM.
-This object can make all MPs on an LTM¡¦s forwarding path reply with LTRs,
+This object can make all MPs on an LTM??s forwarding path reply with LTRs,
 whether they are on a Bridge or not.""",
         }, # scalar
         "cfmMdTable" : {
