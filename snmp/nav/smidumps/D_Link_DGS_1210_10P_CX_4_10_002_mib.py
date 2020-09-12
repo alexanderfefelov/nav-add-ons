@@ -2075,7 +2075,7 @@ bridge.""",
 information learned from the network on any port
 before it is discarded, in units of hundredths of
 a second. The rootTimes variable comprises the 
-Bridge¡¦s operational timer parameter values 
+Bridge??s operational timer parameter values 
 (Message Age, Max Age, Forward Delay, and 
 Hello Time), derived from the values stored in 
 portTimes (17.19.22) for the Root Port or from 
@@ -2173,7 +2173,7 @@ Root and Designated Ports to Forwarding
             "description" :
                 """The Max Age component of designatedTimes (17.19.5).
 This time value, measured in units of hundredths
-of a second. BridgeTimes comprises four components¡Xthe 
+of a second. BridgeTimes comprises four components??the 
 current values of Bridge Forward Delay, Bridge Hello Time,
 and Bridge Max Age (17.13, Table 17-1), and a Message Age 
 of zero.""",
@@ -2208,7 +2208,7 @@ of zero.""",
             "description" :
                 """The Hello Time component of designatedTimes (17.19.5).
 This time value, measured in units of hundredths
-of a second. BridgeTimes comprises four components¡Xthe 
+of a second. BridgeTimes comprises four components??the 
 current values of Bridge Forward Delay, Bridge Hello Time,
 and Bridge Max Age (17.13, Table 17-1), and a Message Age 
 of zero.""",
@@ -2243,7 +2243,7 @@ of zero.""",
             "description" :
                 """The Forward Delay component of designatedTimes (17.19.5).
 This time value, measured in units of hundredths
-of a second. BridgeTimes comprises four components¡Xthe 
+of a second. BridgeTimes comprises four components??the 
 current values of Bridge Forward Delay, Bridge Hello Time,
 and Bridge Max Age (17.13, Table 17-1), and a Message Age 
 of zero.""",
@@ -6132,9 +6132,9 @@ trusted host entry.""",
 of the rowstatus variables (active, createAndGo, destroy) 
 are available.
 IPv4 Trust Host created example: 
-1.4.¡¨IPv4 address¡¨.4.¡¨mask¡¨
+1.4.??IPv4 address??.4.??mask??
 IPv6 Trust Host created example: 
-2.16.¡¨IPv6 address¡¨.1.¡¨prefix¡¨""",
+2.16.??IPv6 address??.1.??prefix??""",
         }, # column
         "securityPortSecurity" : {
             "nodetype" : "node",
