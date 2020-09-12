@@ -24,7 +24,7 @@ class DLinkEquipmentMib(MibRetriever):
             'swFanUnitIndex',
             'swFanID',
             'swFanNumber',
-            'swFanStatus'
+            'swFanStatus',
             'swFanSpeed'
         ])
         result.addCallback(reduce_index)
