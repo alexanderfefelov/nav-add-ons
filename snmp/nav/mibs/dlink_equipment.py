@@ -61,7 +61,7 @@ class DLinkEquipmentMib(MibRetriever):
                 name=internal_name,
                 internal_name=internal_name,
                 description=description,
-                unit_of_measurement=Sensor.UNIT_UNKNOWN,
+                unit_of_measurement='',
                 precision=0,
                 scale=None
             ))
