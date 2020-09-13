@@ -1,5 +1,5 @@
 from nav.mibs.dlink_ddm import DLinkDdmMib
-from nav.mibs.dlink_dgs_12xx import \
+from nav.mibs.dlink_dgs_1210_xx import \
     DLink_DGS_1210_10_ME_AX_Mib, \
     DLink_DGS_1210_10_ME_BX_Mib, \
     DLink_DGS_1210_10_P_CX_Mib, \
