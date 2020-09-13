@@ -6,6 +6,7 @@
 [sensors:vendormibs]
 ...
 D_LINK_SYSTEMS_INC = DLinkSensorsMib
+MIKROTIK = MikroTikMikrotikMib
 ...
 ```
 
