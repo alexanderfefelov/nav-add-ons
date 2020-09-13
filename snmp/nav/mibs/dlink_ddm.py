@@ -23,7 +23,7 @@ class DLinkDdmMib(MibRetriever):
             'swDdmTxPower',
             'swDdmVoltage',
             'swDdmTemperature',
-            'swDdmBiasCurrent',
+            'swDdmBiasCurrent'
         ])
         result.addCallback(reduce_index)
         return result
