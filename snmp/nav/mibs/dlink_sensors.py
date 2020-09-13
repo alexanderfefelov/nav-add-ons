@@ -1,15 +1,16 @@
 from nav.mibs.dlink_ddm import DLinkDdmMib
-from nav.mibs.dlink_dgs_1210_xx import \
-    DLink_DGS_1210_10_ME_AX_Mib, \
-    DLink_DGS_1210_10_ME_BX_Mib, \
-    DLink_DGS_1210_10_P_CX_Mib, \
-    DLink_DGS_1210_10_P_ME_AX_Mib, \
-    DLink_DGS_1210_10_P_ME_BX_Mib, \
-    DLink_DGS_1210_12_TS_ME_BX_Mib, \
-    DLink_DGS_1210_28_ME_AX_Mib, \
-    DLink_DGS_1210_28_ME_BX_Mib, \
-    DLink_DGS_1210_28_XS_ME_BX_Mib, \
+from nav.mibs.dlink_dgs_1210_xx import (
+    DLink_DGS_1210_10_ME_AX_Mib,
+    DLink_DGS_1210_10_ME_BX_Mib,
+    DLink_DGS_1210_10_P_CX_Mib,
+    DLink_DGS_1210_10_P_ME_AX_Mib,
+    DLink_DGS_1210_10_P_ME_BX_Mib,
+    DLink_DGS_1210_12_TS_ME_BX_Mib,
+    DLink_DGS_1210_28_ME_AX_Mib,
+    DLink_DGS_1210_28_ME_BX_Mib,
+    DLink_DGS_1210_28_XS_ME_BX_Mib,
     DLink_DGS_1210_52_ME_BX_Mib
+)
 from nav.mibs.dlink_equipment import DLinkEquipmentMib
 from nav.mibs.mibretriever import MibRetriever
 from nav.smidumps import get_mib
