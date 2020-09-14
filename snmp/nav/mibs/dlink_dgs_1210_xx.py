@@ -60,6 +60,7 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
         return dict(
             mib=module_name,
             oid=oid,
+            ifindex=port,
             name=internal_name,
             internal_name=internal_name,
             description=description,
