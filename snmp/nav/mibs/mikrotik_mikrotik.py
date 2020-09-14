@@ -47,13 +47,13 @@ class MikroTikMikrotikMib(MibRetriever):
         result = []
         result.append(self._get_sensor('mtxrHlBackupPowerSupplyState', ''))
         result.append(self._get_sensor('mtxrHlPowerSupplyState', ''))
-        result.append(self._get_sensor('mtxrHlCurrent', Sensor.UNIT_AMPERES))
-        result.append(self._get_sensor('mtxrHlPower', Sensor.UNIT_WATTS))
+        result.append(self._get_sensor('mtxrHlCurrent', Sensor.UNIT_AMPERES, 3))
+        result.append(self._get_sensor('mtxrHlPower', Sensor.UNIT_WATTS, 1))
         result.append(self._get_sensor('mtxrHlCoreVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self._get_sensor('mtxrHlFiveVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self._get_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self._get_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self._get_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self._get_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC))
         return result
 
     def _get_temperature_sensors(self):
