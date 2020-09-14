@@ -17,7 +17,7 @@ class MikroTikMikrotikMib(MibRetriever):
 
     def _get_sensor(self, sensor, unit_of_measurement, precision=0, scale=None):
         module_name = self.get_module_name()
-        oid = str(self.nodes[sensor].oid)
+        oid = str(self.nodes[sensor].oid) + '.0'
         internal_name = sensor
         description = internal_name
         return dict(
