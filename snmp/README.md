@@ -7,6 +7,7 @@
 ...
 D_LINK_SYSTEMS_INC = DLinkSensorsMib
 MIKROTIK = MikroTikMikrotikMib
+NAG_LLC = NagNagMib
 ...
 ```
 
