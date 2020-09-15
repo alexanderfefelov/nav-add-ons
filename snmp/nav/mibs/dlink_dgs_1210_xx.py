@@ -1,7 +1,6 @@
 from nav.mibs import reduce_index
 from nav.mibs.mibretriever import MibRetriever
 from nav.models.manage import Sensor
-from nav.smidumps import get_mib
 from twisted.internet import defer
 
 
@@ -68,49 +67,3 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
             precision=0,
             scale=scale
         )
-
-
-class DLink_DGS_1210_10_ME_AX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_10ME_AX_6_14_001_mib')
-
-
-class DLink_DGS_1210_10_ME_BX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_10ME_BX_7_03_001_mib')
-
-
-class DLink_DGS_1210_10_P_CX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_10P_CX_4_10_002_mib')
-
-    def _get_ddm_columns(self):
-        return []
-
-    def _get_ddm_sensors(self, data):
-        return []
-
-
-class DLink_DGS_1210_10_P_ME_AX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_10PME_AX_6_13_017_mib')
-
-
-class DLink_DGS_1210_10_P_ME_BX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_10PME_BX_7_02_017_mib')
-
-
-class DLink_DGS_1210_12_TS_ME_BX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_12TSME_BX_7_03_001_mib')
-
-
-class DLink_DGS_1210_28_ME_AX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_28ME_AX_6_14_001_mib')
-
-
-class DLink_DGS_1210_28_ME_BX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_28ME_BX_7_03_001_mib')
-
-
-class DLink_DGS_1210_28_XS_ME_BX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_28XSME_BX_7_03_001_mib')
-
-
-class DLink_DGS_1210_52_ME_BX_Mib(_DLink_DGS_1210_XX_Mib):
-    mib = get_mib('D_Link_DGS_1210_52ME_BX_7_02_017_mib')
