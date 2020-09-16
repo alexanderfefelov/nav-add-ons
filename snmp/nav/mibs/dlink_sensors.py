@@ -1,5 +1,7 @@
 import inspect
 from nav.mibs.dlink_ddm import DLinkDdmMib
+from nav.mibs.dlink_des_1210_08_p_bx import DLink_DES_1210_08_P_BX_Mib
+from nav.mibs.dlink_des_1210_28_p_cx import DLink_DES_1210_28_P_CX_Mib
 from nav.mibs.dlink_dgs_1210_10_me_ax import DLink_DGS_1210_10_ME_AX_Mib
 from nav.mibs.dlink_dgs_1210_10_me_bx import DLink_DGS_1210_10_ME_BX_Mib
 from nav.mibs.dlink_dgs_1210_10_p_cx import DLink_DGS_1210_10_P_CX_Mib
@@ -24,6 +26,8 @@ class DLinkSensorsMib(MibRetriever):
         super(DLinkSensorsMib, self).__init__(agent_proxy)
         self.equipment_mib = DLinkEquipmentMib(agent_proxy)
         self.ddm_mib = DLinkDdmMib(agent_proxy)
+        self.des_1210_08_p_bx_mib = DLink_DES_1210_08_P_BX_Mib(agent_proxy)
+        self.des_1210_28_p_cx_mib = DLink_DES_1210_28_P_CX_Mib(agent_proxy)
         self.dgs_1210_10_me_ax_mib = DLink_DGS_1210_10_ME_AX_Mib(agent_proxy)
         self.dgs_1210_10_me_bx_mib = DLink_DGS_1210_10_ME_BX_Mib(agent_proxy)
         self.dgs_1210_10_p_cx_mib = DLink_DGS_1210_10_P_CX_Mib(agent_proxy)
@@ -40,6 +44,8 @@ class DLinkSensorsMib(MibRetriever):
         self._logger.debug(here(self))
         equipment_sensors = yield self.equipment_mib.get_all_sensors()
         ddm_sensors = yield self.ddm_mib.get_all_sensors()
+        des_1210_08_p_bx_sensors = yield self.des_1210_08_p_bx_mib.get_all_sensors()
+        des_1210_28_p_cx_sensors = yield self.des_1210_28_p_cx_mib.get_all_sensors()
         dgs_1210_10_me_ax_sensors = yield self.dgs_1210_10_me_ax_mib.get_all_sensors()
         dgs_1210_10_me_bx_sensors = yield self.dgs_1210_10_me_bx_mib.get_all_sensors()
         dgs_1210_10_p_cx_sensors = yield self.dgs_1210_10_p_cx_mib.get_all_sensors()
@@ -53,6 +59,8 @@ class DLinkSensorsMib(MibRetriever):
         result = []
         result.extend(equipment_sensors)
         result.extend(ddm_sensors)
+        result.extend(des_1210_08_p_bx_sensors)
+        result.extend(des_1210_28_p_cx_sensors)
         result.extend(dgs_1210_10_me_ax_sensors)
         result.extend(dgs_1210_10_me_bx_sensors)
         result.extend(dgs_1210_10_p_cx_sensors)
