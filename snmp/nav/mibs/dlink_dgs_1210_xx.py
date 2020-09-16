@@ -8,6 +8,7 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
 
     @defer.inlineCallbacks
     def get_cpu_loadavg(self):
+        self._logger.debug(here(self))
         utilization1 = yield self.get_next('agentCPUutilizationIn1min')
         utilization5 = yield self.get_next('agentCPUutilizationIn5min')
         if utilization1 or utilization5:
@@ -18,10 +19,12 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
             defer.returnValue(result)
 
     def get_cpu_utilization(self):
+        self._logger.debug(here(self))
         return defer.succeed(None)
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
+        self._logger.debug(here(self))
         ddm_columns = yield self._get_ddm_columns()
         ddm_sensors = self._get_ddm_sensors(ddm_columns)
         result = []
@@ -29,6 +32,7 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
         defer.returnValue(result)
 
     def _get_ddm_columns(self):
+        self._logger.debug(here(self))
         result = self.retrieve_columns([
             'ddmStatusPort',
             'ddmRxPower',
@@ -41,6 +45,7 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
         return result
 
     def _get_ddm_sensors(self, data):
+        self._logger.debug(here(self))
         result = []
         for _, item in data.items():
             port = item.get('ddmStatusPort')
@@ -52,6 +57,7 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
         return result
 
     def _get_port_sensor(self, port, sensor, unit_of_measurement, scale=None):
+        self._logger.debug(here(self))
         module_name = self.get_module_name()
         oid = str(self.nodes[sensor].oid) + '.' + str(port)
         internal_name = '{}.{}'.format(sensor, str(port))
@@ -67,3 +73,5 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
             precision=0,
             scale=scale
         )
+
+here = lambda this : '{}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
