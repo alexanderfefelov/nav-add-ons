@@ -1,3 +1,4 @@
+import inspect
 from nav.mibs import reduce_index
 from nav.mibs.mibretriever import MibRetriever
 from nav.models.manage import Sensor
@@ -10,6 +11,7 @@ class NagNagMib(MibRetriever):
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
+        self._logger.debug(here(self))
         ddm_columns = yield self._get_ddm_columns()
         ddm_sensors = self._get_ddm_sensors(ddm_columns)
         result = []
@@ -17,6 +19,7 @@ class NagNagMib(MibRetriever):
         defer.returnValue(result)
 
     def _get_ddm_columns(self):
+        self._logger.debug(here(self))
         result = self.retrieve_columns([
             'ddmDiagnosisIfIndex',
             'ddmDiagnosisTemperature',
@@ -29,6 +32,7 @@ class NagNagMib(MibRetriever):
         return result
 
     def _get_ddm_sensors(self, data):
+        self._logger.debug(here(self))
         result = []
         for _, item in data.items():
             port = item.get('ddmDiagnosisIfIndex')
@@ -40,6 +44,7 @@ class NagNagMib(MibRetriever):
         return result
 
     def _get_port_sensor(self, port, sensor, unit_of_measurement, scale=None):
+        self._logger.debug(here(self))
         module_name = self.get_module_name()
         oid = str(self.nodes[sensor].oid) + '.' + str(port)
         internal_name = '{}.{}'.format(sensor, str(port))
@@ -55,3 +60,6 @@ class NagNagMib(MibRetriever):
             precision=0,
             scale=scale
         )
+
+
+here = lambda this : 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

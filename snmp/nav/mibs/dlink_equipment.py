@@ -1,3 +1,4 @@
+import inspect
 from nav.mibs import reduce_index
 from nav.mibs.mibretriever import MibRetriever
 from nav.models.manage import Sensor
@@ -10,6 +11,7 @@ class DLinkEquipmentMib(MibRetriever):
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
+        self._logger.debug(here(self))
         fan_columns = yield self._get_fan_columns()
         fan_sensors = self._get_fan_sensors(fan_columns)
         temperature_columns = yield self._get_temperature_columns()
@@ -20,6 +22,7 @@ class DLinkEquipmentMib(MibRetriever):
         defer.returnValue(result)
 
     def _get_fan_columns(self):
+        self._logger.debug(here(self))
         result = self.retrieve_columns([
             'swFanUnitIndex',
             'swFanID',
@@ -31,6 +34,7 @@ class DLinkEquipmentMib(MibRetriever):
         return result
 
     def _get_fan_sensors(self, data):
+        self._logger.debug(here(self))
         result = []
         module_name = self.get_module_name()
         for _, item in data.items():
@@ -68,6 +72,7 @@ class DLinkEquipmentMib(MibRetriever):
         return result
 
     def _get_temperature_columns(self):
+        self._logger.debug(here(self))
         result = self.retrieve_columns([
             'swTemperatureUnitIndex',
             'swTemperatureCurrent'
@@ -76,6 +81,7 @@ class DLinkEquipmentMib(MibRetriever):
         return result
 
     def _get_temperature_sensors(self, data):
+        self._logger.debug(here(self))
         result = []
         module_name = self.get_module_name()
         for _, item in data.items():
@@ -94,3 +100,6 @@ class DLinkEquipmentMib(MibRetriever):
                 scale=None
             ))
         return result
+
+
+here = lambda this : 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

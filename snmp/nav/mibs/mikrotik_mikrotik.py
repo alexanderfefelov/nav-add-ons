@@ -1,3 +1,4 @@
+import inspect
 from nav.mibs.mibretriever import MibRetriever
 from nav.models.manage import Sensor
 from nav.smidumps import get_mib
@@ -9,6 +10,7 @@ class MikroTikMikrotikMib(MibRetriever):
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
+        self._logger.debug(here(self))
         fans = yield self._get_fan_sensors()
         other = yield self._get_other_sensors()
         power_supply = yield self._get_power_supply_sensors()
@@ -16,6 +18,7 @@ class MikroTikMikrotikMib(MibRetriever):
         defer.returnValue(fans + other + power_supply + temperatures)
 
     def _get_sensor(self, sensor, unit_of_measurement, precision=0, scale=None):
+        self._logger.debug(here(self))
         module_name = self.get_module_name()
         oid = str(self.nodes[sensor].oid) + '.0'
         internal_name = sensor
@@ -32,6 +35,7 @@ class MikroTikMikrotikMib(MibRetriever):
         )
 
     def _get_fan_sensors(self):
+        self._logger.debug(here(self))
         result = []
         result.append(self._get_sensor('mtxrHlActiveFan', ''))
         result.append(self._get_sensor('mtxrHlFanSpeed1', Sensor.UNIT_RPM))
@@ -39,11 +43,13 @@ class MikroTikMikrotikMib(MibRetriever):
         return result
 
     def _get_other_sensors(self):
+        self._logger.debug(here(self))
         result = []
         result.append(self._get_sensor('mtxrHlProcessorFrequency', Sensor.UNIT_HERTZ, scale=Sensor.SCALE_MEGA))
         return result
 
     def _get_power_supply_sensors(self):
+        self._logger.debug(here(self))
         result = []
         result.append(self._get_sensor('mtxrHlBackupPowerSupplyState', ''))
         result.append(self._get_sensor('mtxrHlPowerSupplyState', ''))
@@ -57,6 +63,7 @@ class MikroTikMikrotikMib(MibRetriever):
         return result
 
     def _get_temperature_sensors(self):
+        self._logger.debug(here(self))
         result = []
         result.append(self._get_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1))
         result.append(self._get_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, 1))
@@ -64,3 +71,6 @@ class MikroTikMikrotikMib(MibRetriever):
         result.append(self._get_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, 1))
         result.append(self._get_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, 1))
         return result
+
+
+here = lambda this : 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
