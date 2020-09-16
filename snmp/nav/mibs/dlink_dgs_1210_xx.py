@@ -27,8 +27,8 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
     def get_all_sensors(self):
         self._logger.debug(here(self))
         ddm_columns = yield self._get_ddm_columns()
-        ddm_sensors = self._get_ddm_sensors(ddm_columns)
-        system_poe_sensors = self._get_system_poe_sensors()
+        ddm_sensors = yield self._get_ddm_sensors(ddm_columns)
+        system_poe_sensors = yield self._get_system_poe_sensors()
         result = []
         result.extend(ddm_sensors)
         result.extend(system_poe_sensors)
@@ -102,5 +102,6 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
             precision=0,
             scale=scale
         )
+
 
 here = lambda this : '{}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
