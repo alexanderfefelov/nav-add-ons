@@ -28,9 +28,12 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
         self._logger.debug(here(self))
         ddm_columns = yield self._get_ddm_columns()
         ddm_sensors = yield self._get_ddm_sensors(ddm_columns)
+        ports_poe_columns = yield self._get_ports_poe_columns()
+        ports_poe_sensors = yield self._get_ports_poe_sensors(ports_poe_columns)
         system_poe_sensors = yield self._get_system_poe_sensors()
         result = []
         result.extend(ddm_sensors)
+        result.extend(ports_poe_sensors)
         result.extend(system_poe_sensors)
         defer.returnValue(result)
 
@@ -59,6 +62,29 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
             result.append(self._get_port_sensor(port, 'ddmBiasCurrent', Sensor.UNIT_AMPERES, Sensor.SCALE_MILLI))
         return result
 
+    def _get_ports_poe_columns(self):
+        self._logger.debug(here(self))
+        result = self.retrieve_columns([
+            'poeportgroup',
+            'poeportid',
+            'poePortPower',
+            'poePortVoltage',
+            'poePortCurrent'
+        ])
+        result.addCallback(reduce_index)
+        return result
+
+    def _get_ports_poe_sensors(self, data):
+        self._logger.debug(here(self))
+        result = []
+        for _, item in data.items():
+            group = item.get('poeportgroup')
+            port = item.get('poeportid')
+            result.append(self._get_group_port_sensor(group, port, 'poePortPower', Sensor.UNIT_WATTS))
+            result.append(self._get_group_port_sensor(group, port, 'poePortVoltage', Sensor.UNIT_VOLTS_DC))
+            result.append(self._get_group_port_sensor(group, port, 'poePortCurrent', Sensor.UNIT_AMPERES))
+        return result
+
     def _get_system_poe_sensors(self):
         self._logger.debug(here(self))
         result = []
@@ -85,6 +111,24 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
             scale=None
         )
 
+    def _get_group_port_sensor(self, group, port, sensor, unit_of_measurement, scale=None):
+        self._logger.debug(here(self))
+        module_name = self.get_module_name()
+        oid = str(self.nodes[sensor].oid) + '.' + str(group) + '.' + str(port)
+        internal_name = '{}.{}.{}'.format(sensor, str(group), str(port))
+        description = internal_name
+        return dict(
+            mib=module_name,
+            oid=oid,
+            ifindex=port,
+            name=internal_name,
+            internal_name=internal_name,
+            description=description,
+            unit_of_measurement=unit_of_measurement,
+            precision=0,
+            scale=scale
+        )
+
     def _get_port_sensor(self, port, sensor, unit_of_measurement, scale=None):
         self._logger.debug(here(self))
         module_name = self.get_module_name()
@@ -104,4 +148,4 @@ class _DLink_DGS_1210_XX_Mib(MibRetriever):
         )
 
 
-here = lambda this : '{}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
+here = lambda this : 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
