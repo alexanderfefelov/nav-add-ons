@@ -13,7 +13,7 @@ NAG_LLC = NagNagMib
 ...
 ```
 
-Patch the `nav/ipdevpoll/plugins/statsystem.py` file:
+Change the `nav/ipdevpoll/plugins/statsystem.py` file manually:
 
 ```python
 ...
@@ -52,3 +52,5 @@ CPU_MIBS = {
 }
 ...
 ```
+
+or apply appropriate [patch](patches).
