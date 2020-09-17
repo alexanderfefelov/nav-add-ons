@@ -1,6 +1,8 @@
 # nav-add-ons/snmp
 
-`/etc/nav/ipdevpoll.conf`:
+## Installation
+
+Edit the `/etc/nav/ipdevpoll.conf` file:
 
 ```ini
 [sensors:vendormibs]
@@ -11,7 +13,7 @@ NAG_LLC = NagNagMib
 ...
 ```
 
-`nav/ipdevpoll/plugins/statsystem`:
+Patch the `nav/ipdevpoll/plugins/statsystem.py` file:
 
 ```python
 ...
@@ -26,6 +28,10 @@ from nav.mibs.dlink_dgs_1210_28_me_bx import DLink_DGS_1210_28_ME_BX_Mib
 from nav.mibs.dlink_dgs_1210_28_xs_me_bx import DLink_DGS_1210_28_XS_ME_BX_Mib
 from nav.mibs.dlink_dgs_1210_52_me_bx import DLink_DGS_1210_52_ME_BX_Mib
 from nav.mibs.dlink_genmgmt import DLinkGenmgmtMib
+...
+from nav.enterprise.ids import (...
+                                VENDOR_ID_D_LINK_SYSTEMS_INC,
+                                ...)
 ...
 CPU_MIBS = {
     ...
