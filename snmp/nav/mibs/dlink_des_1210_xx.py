@@ -38,7 +38,7 @@ class _DLink_DES_1210_XX_Mib(MibRetriever):
             port = item.get('poeportid')
             result.append(self._get_group_port_sensor(group, port, 'poePortPower', Sensor.UNIT_WATTS))
             result.append(self._get_group_port_sensor(group, port, 'poePortVoltage', Sensor.UNIT_VOLTS_DC))
-            result.append(self._get_group_port_sensor(group, port, 'poePortCurrent', Sensor.UNIT_AMPERES))
+            result.append(self._get_group_port_sensor(group, port, 'poePortCurrent', Sensor.UNIT_AMPERES, Sensor.SCALE_MILLI))
         return result
 
     def _get_system_poe_sensors(self):
