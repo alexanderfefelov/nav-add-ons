@@ -7,9 +7,23 @@ Edit the `/etc/nav/ipdevpoll.conf` file:
 ```ini
 [sensors:vendormibs]
 ...
-D_LINK_SYSTEMS_INC = DLinkSensorsMib
-MIKROTIK = MikroTikMikrotikMib
-NAG_LLC = NagNagMib
+D_LINK_SYSTEMS_INC =
+    DLink_DES_1210_08_P_BX_Mib
+    DLink_DES_1210_28_P_CX_Mib
+    DLink_DGS_1210_10_ME_AX_Mib
+    DLink_DGS_1210_10_ME_BX_Mib
+    DLink_DGS_1210_10_P_CX_Mib
+    DLink_DGS_1210_10_P_ME_AX_Mib
+    DLink_DGS_1210_10_P_ME_BX_Mib
+    DLink_DGS_1210_12_TS_ME_BX_Mib
+    DLink_DGS_1210_28_ME_AX_Mib
+    DLink_DGS_1210_28_ME_BX_Mib
+    DLink_DGS_1210_28_XS_ME_BX_Mib
+    DLink_DGS_1210_52_ME_BX_Mib
+    DLink_Ddm_Mib
+    DLink_Equipment_Mib
+MIKROTIK = MikroTik_Mikrotik_Mib
+NAG_LLC = Nag_Nag_Mib
 ...
 ```
 
@@ -46,7 +60,7 @@ CPU_MIBS = {
         DLink_DGS_1210_28_ME_BX_Mib,
         DLink_DGS_1210_28_XS_ME_BX_Mib,
         DLink_DGS_1210_52_ME_BX_Mib,
-        DLinkGenmgmtMib
+        DLink_Genmgmt_Mib
     ],
     ...
 }

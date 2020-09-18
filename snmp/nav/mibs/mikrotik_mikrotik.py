@@ -1,76 +1,68 @@
-import inspect
 from nav.mibs.mibretriever import MibRetriever
+from nav.mibs.snmp_add_on import SnmpAddOn
 from nav.models.manage import Sensor
 from nav.smidumps import get_mib
 from twisted.internet import defer
+import inspect
 
 
-class MikroTikMikrotikMib(MibRetriever):
+class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('MikroTik_mikrotik_mib')
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
         self._logger.debug(here(self))
-        fans = yield self._get_fan_sensors()
-        other = yield self._get_other_sensors()
-        power_supply = yield self._get_power_supply_sensors()
-        temperatures = yield self._get_temperature_sensors()
-        defer.returnValue(fans + other + power_supply + temperatures)
+        result = []
+        fan_sensors = yield self.get_fan_sensors()
+        power_supply_sensors = yield self.get_power_supply_sensors()
+        temperature_sensors = yield self.get_temperature_sensors()
+        other_sensors = yield self.get_other_sensors()
+        result.extend(fan_sensors)
+        result.extend(power_supply_sensors)
+        result.extend(temperature_sensors)
+        result.extend(other_sensors)
+        self._logger.debug(str(result))
+        defer.returnValue(result)
 
-    def _get_sensor(self, sensor, unit_of_measurement, precision=0, scale=None):
-        self._logger.debug(here(self))
-        module_name = self.get_module_name()
-        oid = str(self.nodes[sensor].oid) + '.0'
-        internal_name = sensor
-        description = internal_name
-        return dict(
-            mib=module_name,
-            oid=oid,
-            name=internal_name,
-            internal_name=internal_name,
-            description=description,
-            unit_of_measurement=unit_of_measurement,
-            precision=precision,
-            scale=scale
-        )
-
-    def _get_fan_sensors(self):
+    def get_fan_sensors(self):
         self._logger.debug(here(self))
         result = []
-        result.append(self._get_sensor('mtxrHlActiveFan', ''))
-        result.append(self._get_sensor('mtxrHlFanSpeed1', Sensor.UNIT_RPM))
-        result.append(self._get_sensor('mtxrHlFanSpeed2', Sensor.UNIT_RPM))
+        result.append(self.get_system_sensor('mtxrHlActiveFan', ''))
+        result.append(self.get_system_sensor('mtxrHlFanSpeed1', Sensor.UNIT_RPM))
+        result.append(self.get_system_sensor('mtxrHlFanSpeed2', Sensor.UNIT_RPM))
         return result
 
-    def _get_other_sensors(self):
+    def get_power_supply_sensors(self):
         self._logger.debug(here(self))
         result = []
-        result.append(self._get_sensor('mtxrHlProcessorFrequency', Sensor.UNIT_HERTZ, scale=Sensor.SCALE_MEGA))
+        result.append(self.get_system_sensor('mtxrHlBackupPowerSupplyState', ''))
+        result.append(self.get_system_sensor('mtxrHlPowerSupplyState', ''))
+        result.append(self.get_system_sensor('mtxrHlCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+        result.append(self.get_system_sensor('mtxrHlPower', Sensor.UNIT_WATTS, 1))
+        result.append(self.get_system_sensor('mtxrHlCoreVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self.get_system_sensor('mtxrHlFiveVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self.get_system_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self.get_system_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC,
+                                             display_maximum_user=300))
         return result
 
-    def _get_power_supply_sensors(self):
+    def get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
-        result.append(self._get_sensor('mtxrHlBackupPowerSupplyState', ''))
-        result.append(self._get_sensor('mtxrHlPowerSupplyState', ''))
-        result.append(self._get_sensor('mtxrHlCurrent', Sensor.UNIT_AMPERES, 3))
-        result.append(self._get_sensor('mtxrHlPower', Sensor.UNIT_WATTS, 1))
-        result.append(self._get_sensor('mtxrHlCoreVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self._get_sensor('mtxrHlFiveVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self._get_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self._get_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self._get_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC))
+        result.append(self.get_system_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1))
+        result.append(self.get_system_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, 1))
+        result.append(self.get_system_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, 1))
+        result.append(self.get_system_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, 1))
+        result.append(self.get_system_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, 1))
         return result
 
-    def _get_temperature_sensors(self):
+    def get_other_sensors(self):
         self._logger.debug(here(self))
         result = []
-        result.append(self._get_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self._get_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self._get_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self._get_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self._get_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, 1))
+        result.append(self.get_system_sensor('mtxrHlProcessorFrequency', Sensor.UNIT_HERTZ, scale=Sensor.SCALE_MEGA))
         return result
 
 
-here = lambda this : 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
+                                               type(this).__name__, inspect.stack()[1].function)
