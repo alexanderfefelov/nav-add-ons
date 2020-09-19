@@ -18,8 +18,10 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
         self._logger.debug(str(result))
         defer.returnValue(result)
 
+    @defer.inlineCallbacks
     def get_ddm_sensors(self):
         self._logger.debug(here(self))
+        result = []
         columns = yield self.retrieve_columns([
             'ddmDiagnosisIfIndex',
             'ddmDiagnosisTemperature',
@@ -28,14 +30,14 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
             'ddmDiagnosisRXPower',
             'ddmDiagnosisTXPower'
         ])
-        result = []
-        for _, item in columns.items():
-            port = item.get('ddmDiagnosisIfIndex')
-            result.append(self.get_port_sensor(port, 'ddmDiagnosisRXPower', Sensor.UNIT_DBM))
-            result.append(self.get_port_sensor(port, 'ddmDiagnosisTXPower', Sensor.UNIT_DBM))
-            result.append(self.get_port_sensor(port, 'ddmDiagnosisVoltage', Sensor.UNIT_VOLTS_DC))
-            result.append(self.get_port_sensor(port, 'ddmDiagnosisTemperature', Sensor.UNIT_CELSIUS))
-            result.append(self.get_port_sensor(port, 'ddmDiagnosisBias', Sensor.UNIT_AMPERES, Sensor.SCALE_MILLI))
+        if columns:
+            for _, item in columns.items():
+                port = item.get('ddmDiagnosisIfIndex')
+                result.append(self.get_port_sensor(port, 'ddmDiagnosisRXPower', Sensor.UNIT_DBM))
+                result.append(self.get_port_sensor(port, 'ddmDiagnosisTXPower', Sensor.UNIT_DBM))
+                result.append(self.get_port_sensor(port, 'ddmDiagnosisVoltage', Sensor.UNIT_VOLTS_DC))
+                result.append(self.get_port_sensor(port, 'ddmDiagnosisTemperature', Sensor.UNIT_CELSIUS))
+                result.append(self.get_port_sensor(port, 'ddmDiagnosisBias', Sensor.UNIT_AMPERES, Sensor.SCALE_MILLI))
         return result
 
 
