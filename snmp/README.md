@@ -67,4 +67,40 @@ CPU_MIBS = {
 ...
 ```
 
-or apply appropriate [patch](patches).
+## Metrics matrix
+
+### D-Link
+
+| Device              | CPU load | Memory load | Fans | Temperatures | DDM  | PoE
+| :------------------ | :------- | :---------- | :--- | :----------- | :--- | :---
+| DES-3200-26         |          |             |      |              |      |
+| DES-3200-28         |          |             |      |              |      |
+| DES-1210-08P        |          |             |      |              |      |
+| DES-1210-28P        |          |             |      |              |      |
+| DES-3200-28/C1      |          |             |      |              |      |
+| DGS-1210-10P/C1     |          |             |      |              |      |
+| DGS-1210-10P/ME/A1  |          |             |      |              |      |
+| DGS-1210-10P/ME/B1  |          |             |      |              |      |
+| DGS-1210-28/ME/B1   |          |             |      |              |      |
+| DGS-1210-28XS/ME/B1 |          |             |      |              |      |
+| DGS-1210-52/ME/B1   |          |             |      |              |      |
+| DGS-1210-52/ME/B1   |          |             |      |              |      |
+| DGS-1210-52/ME/B1   |          |             |      |              |      |
+| DGS-1510-28X/ME     |          |             |      |              |      |
+| DGS-1510-28XS/ME    |          |             |      |              |      |
+| DGS-3000-28XS       |          |             |      |              |      |
+| DGS-3120-24SC       |          |             |      |              |      |
+| DGS-3420-28SC       |          |             |      |              |      |
+| DXS-1210-12SC       |          |             |      |              |      |
+
+### MikroTik
+
+TDB
+
+### NAG
+
+TBD
+
+### TP-Link
+
+TBD

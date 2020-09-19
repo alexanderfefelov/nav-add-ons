@@ -17,16 +17,14 @@ class DLink(SnmpAddOn):
     @defer.inlineCallbacks
     def get_cpu_loadavg(self):
         self._logger.debug(here(self))
-        ok = yield self.is_supported()
-        if ok:
-            utilization1 = yield self.get_next('agentCPUutilizationIn1min')
-            utilization5 = yield self.get_next('agentCPUutilizationIn5min')
-            if utilization1 or utilization5:
-                result = dict(cpu=[
-                    (1, utilization1),
-                    (5, utilization5)
-                ])
-                defer.returnValue(result)
+        utilization1 = yield self.get_next('agentCPUutilizationIn1min')
+        utilization5 = yield self.get_next('agentCPUutilizationIn5min')
+        if utilization1 or utilization5:
+            result = dict(cpu=[
+                (1, utilization1),
+                (5, utilization5)
+            ])
+            defer.returnValue(result)
 
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
