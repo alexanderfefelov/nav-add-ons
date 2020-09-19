@@ -1,21 +1,16 @@
 from nav.mibs.dlink_dgs_1210_xx import DLink_DGS_1210_XX
 from nav.mibs.mibretriever import MibRetriever
 from nav.smidumps import get_mib
-from twisted.internet import defer
 import inspect
 
 
 class DLink_DGS_1210_10_ME_AX_Mib(MibRetriever, DLink_DGS_1210_XX):
     mib = get_mib('D_Link_DGS_1210_10ME_AX_6_14_001_mib')
+    SUPPORTED_ROOT = 'dgs-1210-10meax'
 
-    @defer.inlineCallbacks
-    def get_all_sensors(self):
+    def get_ddm_sensors(self):
         self._logger.debug(here(self))
-        result = []
-        ddm_sensors = yield self.get_ddm_sensors()
-        result.extend(ddm_sensors)
-        self._logger.debug(str(result))
-        defer.returnValue(result)
+        return self._get_ddm_sensors()
 
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,

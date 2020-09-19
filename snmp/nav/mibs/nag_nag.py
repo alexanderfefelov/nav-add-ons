@@ -1,4 +1,3 @@
-from nav.mibs import reduce_index
 from nav.mibs.mibretriever import MibRetriever
 from nav.mibs.snmp_add_on import SnmpAddOn
 from nav.models.manage import Sensor
@@ -21,14 +20,14 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
 
     def get_ddm_sensors(self):
         self._logger.debug(here(self))
-        columns = yield reduce_index(self.retrieve_columns([
+        columns = yield self.retrieve_columns([
             'ddmDiagnosisIfIndex',
             'ddmDiagnosisTemperature',
             'ddmDiagnosisVoltage',
             'ddmDiagnosisBias',
             'ddmDiagnosisRXPower',
             'ddmDiagnosisTXPower'
-        ]))
+        ])
         result = []
         for _, item in columns.items():
             port = item.get('ddmDiagnosisIfIndex')

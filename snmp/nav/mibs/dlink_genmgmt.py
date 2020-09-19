@@ -5,3 +5,4 @@ from nav.smidumps import get_mib
 
 class DLinkGenmgmtMib(MibRetriever, DLink):
     mib = get_mib('D_Link_Genmgmt_mib')
+    SUPPORTED_ROOT = 'agentGeneralMgmt'

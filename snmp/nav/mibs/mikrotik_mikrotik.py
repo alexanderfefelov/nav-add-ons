@@ -43,8 +43,7 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.append(self.get_system_sensor('mtxrHlFiveVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC,
-                                             display_maximum_user=300))
+        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC, display_maximum_user=300))
         return result
 
     def get_temperature_sensors(self):

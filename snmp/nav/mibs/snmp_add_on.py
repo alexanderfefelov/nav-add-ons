@@ -23,7 +23,6 @@ class SnmpAddOn:
             display_minimum_user=display_minimum_user,
             display_maximum_user=display_maximum_user
         )
-        self._logger.debug(str(result))
         return result
 
     def get_system_sensor(self, sensor_name,
@@ -33,7 +32,6 @@ class SnmpAddOn:
         result = self.get_indexed_system_sensor(0, sensor_name,
                                                 unit_of_measurement, precision, scale,
                                                 display_minimum_user, display_maximum_user)
-        self._logger.debug(str(result))
         return result
 
     def get_port_sensor(self, port, sensor_name,
@@ -57,7 +55,6 @@ class SnmpAddOn:
             display_minimum_user=display_minimum_user,
             display_maximum_user=display_maximum_user
         )
-        self._logger.debug(str(result))
         return result
 
     def get_grouped_port_sensor(self, group, port, sensor_name,
@@ -81,7 +78,6 @@ class SnmpAddOn:
             display_minimum_user=display_minimum_user,
             display_maximum_user=display_maximum_user
         )
-        self._logger.debug(str(result))
         return result
 
 
