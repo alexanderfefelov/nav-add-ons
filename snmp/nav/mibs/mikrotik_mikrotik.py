@@ -14,14 +14,14 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         self._logger.debug(here(self))
         result = []
         fan_sensors = yield self.get_fan_sensors()
-        power_supply_sensors = yield self.get_power_supply_sensors()
-        temperature_sensors = yield self.get_temperature_sensors()
-        other_sensors = yield self.get_other_sensors()
         result.extend(fan_sensors)
+        power_supply_sensors = yield self.get_power_supply_sensors()
         result.extend(power_supply_sensors)
-        result.extend(temperature_sensors)
+        other_sensors = yield self.get_other_sensors()
         result.extend(other_sensors)
-        self._logger.debug(str(result))
+        temperature_sensors = yield self.get_temperature_sensors()
+        result.extend(temperature_sensors)
+        self._logger.debug(here(self), str(result))
         defer.returnValue(result)
 
     def get_fan_sensors(self):
@@ -36,30 +36,30 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlBackupPowerSupplyState', ''))
-        result.append(self.get_system_sensor('mtxrHlPowerSupplyState', ''))
-        result.append(self.get_system_sensor('mtxrHlCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
-        result.append(self.get_system_sensor('mtxrHlPower', Sensor.UNIT_WATTS, 1))
         result.append(self.get_system_sensor('mtxrHlCoreVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self.get_system_sensor('mtxrHlCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
         result.append(self.get_system_sensor('mtxrHlFiveVoltage', Sensor.UNIT_VOLTS_DC))
+        result.append(self.get_system_sensor('mtxrHlPower', Sensor.UNIT_WATTS, 1))
+        result.append(self.get_system_sensor('mtxrHlPowerSupplyState', ''))
         result.append(self.get_system_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC, maximum=300))
-        return result
-
-    def get_temperature_sensors(self):
-        self._logger.debug(here(self))
-        result = []
-        result.append(self.get_system_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self.get_system_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self.get_system_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self.get_system_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, 1))
-        result.append(self.get_system_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, 1))
         return result
 
     def get_other_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlProcessorFrequency', Sensor.UNIT_HERTZ, scale=Sensor.SCALE_MEGA))
+        return result
+
+    def get_temperature_sensors(self):
+        self._logger.debug(here(self))
+        result = []
+        result.append(self.get_system_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
         return result
 
 
