@@ -51,6 +51,10 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
         result = []
         ddm_sensors = yield self.get_ddm_sensors()
         result.extend(ddm_sensors)
+        fan_sensors = yield self.get_fan_sensors()
+        result.extend(fan_sensors)
+        temperature_sensors = yield self.get_temperature_sensors()
+        result.extend(temperature_sensors)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -73,6 +77,29 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisVoltage', Sensor.UNIT_VOLTS_DC))
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisTemperature', Sensor.UNIT_CELSIUS))
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisBias', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+        defer.returnValue(result)
+
+    @defer.inlineCallbacks
+    def get_fan_sensors(self):
+        self._logger.debug(here(self))
+        result = []
+        columns = yield self.retrieve_columns([
+            'sysFanIndex',
+            'sysFanStatus',
+            'sysFanSpeed'
+        ])
+        if columns:
+            for _, item in columns.items():
+                index = item.get('sysFanIndex')
+                result.append(self.get_indexed_system_sensor(index, 'sysFanStatus', ''))
+                result.append(self.get_indexed_system_sensor(index, 'sysFanSpeed', Sensor.UNIT_RPM))
+        defer.returnValue(result)
+
+    def get_temperature_sensors(self):
+        self._logger.debug(here(self))
+        result = []
+        result.append(self.get_system_sensor('sysTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('switchTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         defer.returnValue(result)
 
 
