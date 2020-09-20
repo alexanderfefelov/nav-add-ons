@@ -90,39 +90,39 @@ Legend for tables:
 
 ### D-Link switches
 
-| Device              | CPU  | Memory | Fans | Temperatures | DDM  | PoE
-| :------------------ | :--- | :----- | :--- | :----------- | :--- | :---
-| DES-1210-08P        |      |        |      |              |      |
-| DES-1210-28P        |      |        |      |              |      |
-| DES-3200-26         |      |        |      |              |      |
-| DES-3200-28         |      |        |      |              |      |
-| DES-3200-28/C1      |      |        |      |              |      |
-| DGS-1210-10P/C1     |      |        |      |              |      |
-| DGS-1210-10P/ME/A1  |      |        |      |              |      |
-| DGS-1210-10P/ME/B1  |      |        |      |              |      |
-| DGS-1210-28/ME/B1   |      |        |      |              |      |
-| DGS-1210-28XS/ME/B1 |      |        |      |              |      |
-| DGS-1210-52/ME/B1   |      |        | Yes  | Yes          |      |
-| DGS-1510-28X/ME     |      |        |      |              |      |
-| DGS-1510-28XS/ME    |      |        |      |              |      |
-| DGS-3000-28XS       |      |        |      |              |      |
-| DGS-3120-24SC       |      |        |      |              |      |
-| DGS-3420-28SC       |      |        |      |              |      |
-| DXS-1210-12SC       |      |        |      |              |      |
+| Device              | MIB  | CPU  | Memory | Fans | Temperatures | DDM  | PoE
+| :------------------ | :--- | :--- | :----- | :--- | :----------- | :--- | :---
+| DES-1210-08P        |      |      |        |      |              |      |
+| DES-1210-28P        |      |      |        |      |              |      |
+| DES-3200-26         |      |      |        |      |              |      |
+| DES-3200-28         |      |      |        |      |              |      |
+| DES-3200-28/C1      |      |      |        |      |              |      |
+| DGS-1210-10P/C1     |      |      |        |      |              |      |
+| DGS-1210-10P/ME/A1  |      |      |        |      |              |      |
+| DGS-1210-10P/ME/B1  |      |      |        |      |              |      |
+| DGS-1210-28/ME/B1   |      |      |        |      |              |      |
+| DGS-1210-28XS/ME/B1 |      |      |        |      |              |      |
+| DGS-1210-52/ME/B1   | [DGS-1210-52ME-BX](doc/D_Link_DGS_1210_52ME_BX_7_02_017_mib.tree.txt) | | | Yes | Yes | |
+| DGS-1510-28X/ME     |      |      |        |      |              |      |
+| DGS-1510-28XS/ME    |      |      |        |      |              |      |
+| DGS-3000-28XS       |      |      |        |      |              |      |
+| DGS-3120-24SC       |      |      |        |      |              |      |
+| DGS-3420-28SC       |      |      |        |      |              |      |
+| DXS-1210-12SC       |      |      |        |      |              |      |
 
 ### MikroTik
 
-All health sensors as of version 20191210 of MIKROTIK-MIB are implemented.
+All health sensors as of version 20191210 of [MIKROTIK-MIB](doc/MikroTik_mikrotik_mib.tree.txt) are implemented.
 
 ### NAG switches
 
-| Device         | CPU  | Memory | Fans | Temperatures | DDM  | PoE
-| :--------------| :----| :----- | :--- | :----------- | :--- | :---
-| SNR-S2985G-8T  |      |        |      |              |      |    
-| SNR-S2985G-24T | Yes  | Yes    | N/A  | N/A          | Yes  | N/A
+| Device         | MIB  | CPU | Memory | Fans | Temperatures | DDM  | PoE
+| :--------------| :--- |:----| :----- | :--- | :----------- | :--- | :---
+| SNR-S2985G-8T  |      |     |        |      |              |      |    
+| SNR-S2985G-24T | [NAG-MIB](doc/NAG_SNR_SWITCH_private_2_1_80_mib.tree.txt) | Yes | Yes | N/A | N/A | Yes | N/A
 
 ### TP-Link switches
 
-| Device       | CPU  | Memory | Fans | Temperatures | DDM  | PoE
-| :------------| :----| :----- | :--- | :----------- | :--- | :---
-| T1500G-10MPS |      |        |      |              |      |     
+| Device       | MIB  | CPU | Memory | Fans | Temperatures | DDM  | PoE
+| :------------| :--- | :---| :----- | :--- | :----------- | :--- | :---
+| T1500G-10MPS |      |     |        |      |              |      |     
