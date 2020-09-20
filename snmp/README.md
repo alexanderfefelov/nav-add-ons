@@ -86,7 +86,7 @@ Legend for tables:
 
 - `Yes` - implemented and verified
 - `N/A` - implemented but not available on this device
-- `-` - not available on this device
+- `X` - not available on this device
 - empty cell - work in progress
 
 ### D-Link switches
@@ -102,7 +102,7 @@ Legend for tables:
 | DGS-1210-10P/ME/A1  | [DGS-1210-10PME-AX](doc/D_Link_DGS_1210_10PME_AX_6_13_017_mib.tree.txt) | | | | | |
 | DGS-1210-10P/ME/B1  | [DGS-1210-10PME-BX](doc/D_Link_DGS_1210_10PME_BX_7_02_017_mib.tree.txt) | | | | | |
 | DGS-1210-28/ME/B1   | [DGS-1210-28ME-BX](doc/D_Link_DGS_1210_28ME_BX_7_03_001_mib.tree.txt) | | | | | |
-| DGS-1210-28XS/ME/B1 | [DGS-1210-28XSME-BX](doc/D_Link_DGS_1210_28XSME_BX_7_03_001_mib.tree.txt) | | | Yes | - | |
+| DGS-1210-28XS/ME/B1 | [DGS-1210-28XSME-BX](doc/D_Link_DGS_1210_28XSME_BX_7_03_001_mib.tree.txt) | | | Yes | X | |
 | DGS-1210-52/ME/B1   | [DGS-1210-52ME-BX](doc/D_Link_DGS_1210_52ME_BX_7_02_017_mib.tree.txt) | | | Yes | Yes | |
 | DGS-1510-28X/ME     |      |      |        |      |              |      |
 | DGS-1510-28XS/ME    |      |      |        |      |              |      |
