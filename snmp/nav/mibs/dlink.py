@@ -1,29 +1,30 @@
 from nav.mibs.snmp_add_on import SnmpAddOn
 from nav.models.manage import Sensor
 from twisted.internet import defer
-from twisted.internet.defer import returnValue
 import inspect
 
 
 class DLink(SnmpAddOn):
-    SUPPORTED_ROOT = 'd-link'
 
     @defer.inlineCallbacks
     def is_supported(self):
         self._logger.debug(here(self))
         reply = yield self.get_next(self.SUPPORTED_ROOT)
-        returnValue(bool(reply))
+        defer.returnValue(bool(reply))
 
     @defer.inlineCallbacks
     def get_cpu_loadavg(self):
         self._logger.debug(here(self))
-        utilization1 = yield self.get_next('agentCPUutilizationIn1min')
-        utilization5 = yield self.get_next('agentCPUutilizationIn5min')
-        if utilization1 or utilization5:
-            result = dict(cpu=[
-                (1, utilization1),
-                (5, utilization5)
-            ])
+        result = {}
+        utilization_1_min = yield self.get_next('agentCPUutilizationIn1min')
+        if utilization_1_min:
+            utilization_5_min = yield self.get_next('agentCPUutilizationIn5min')
+            result.update({
+                'cpu': [
+                    (1, utilization_1_min),
+                    (5, utilization_5_min)
+                ]
+            })
             defer.returnValue(result)
 
     def get_cpu_utilization(self):
@@ -37,17 +38,16 @@ class DLink(SnmpAddOn):
         ok = yield self.is_supported()
         if ok:
             ddm_sensors = yield self.get_ddm_sensors()
-            fan_sensors = yield self.get_fan_sensors()
-            ports_poe_sensors = yield self.get_ports_poe_sensors()
-            system_poe_sensors = yield self.get_system_poe_sensors()
-            temperature_sensors = yield self.get_temperature_sensors()
             result.extend(ddm_sensors)
+            fan_sensors = yield self.get_fan_sensors()
             result.extend(fan_sensors)
+            ports_poe_sensors = yield self.get_ports_poe_sensors()
             result.extend(ports_poe_sensors)
+            system_poe_sensors = yield self.get_system_poe_sensors()
             result.extend(system_poe_sensors)
+            temperature_sensors = yield self.get_temperature_sensors()
             result.extend(temperature_sensors)
-        self._logger.debug(str(result))
-        defer.returnValue(result)
+            defer.returnValue(result)
 
     # Default sensors implementations are no sensors at all
 
@@ -185,7 +185,6 @@ class DLink(SnmpAddOn):
                 result.append(self.get_grouped_port_sensor(group, port, 'poePortCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
         defer.returnValue(result)
 
-    @defer.inlineCallbacks
     def _get_system_poe_sensors(self):
         self._logger.debug(here(self))
         result = []
@@ -193,7 +192,7 @@ class DLink(SnmpAddOn):
         result.append(self.get_system_sensor('pethPsePortPowerConsumption', Sensor.UNIT_WATTS))
         result.append(self.get_system_sensor('pethPsePortPowerRemainder', Sensor.UNIT_WATTS))
         result.append(self.get_system_sensor('pethPsePortPowerRatioOfSystemPower', Sensor.UNIT_PERCENT))
-        defer.returnValue(result)
+        return result
 
     @defer.inlineCallbacks
     def _get_temperature_sensors(self):
