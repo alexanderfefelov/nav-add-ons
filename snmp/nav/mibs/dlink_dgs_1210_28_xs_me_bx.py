@@ -12,6 +12,12 @@ class DLink_DGS_1210_28_XS_ME_BX_Mib(MibRetriever, DLink_DGS_1210_XX):
         self._logger.debug(here(self))
         return self._get_ddm_sensors()
 
+    def get_fan_sensors(self):
+        self._logger.debug(here(self))
+        result = []
+        result.append(self.get_system_sensor('sysSmartFanStatus', ''))
+        return result
+
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
                                                type(this).__name__, inspect.stack()[1].function)

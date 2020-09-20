@@ -101,7 +101,7 @@ Legend for tables:
 | DGS-1210-10P/ME/A1  |      |      |        |      |              |      |
 | DGS-1210-10P/ME/B1  |      |      |        |      |              |      |
 | DGS-1210-28/ME/B1   |      |      |        |      |              |      |
-| DGS-1210-28XS/ME/B1 |      |      |        |      |              |      |
+| DGS-1210-28XS/ME/B1 | [DGS-1210-28XSME-BX](doc/D_Link_DGS_1210_28XSME_BX_7_03_001_mib.tree.txt) | | | Yes | N/A | |
 | DGS-1210-52/ME/B1   | [DGS-1210-52ME-BX](doc/D_Link_DGS_1210_52ME_BX_7_02_017_mib.tree.txt) | | | Yes | Yes | |
 | DGS-1510-28X/ME     |      |      |        |      |              |      |
 | DGS-1510-28XS/ME    |      |      |        |      |              |      |
