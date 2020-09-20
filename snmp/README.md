@@ -27,7 +27,7 @@ NAG_LLC = Nag_Nag_Mib
 ...
 ```
 
-Change the `nav/ipdevpoll/plugins/statsystem.py` file manually:
+Change the `nav/ipdevpoll/plugins/statsystem.py` file:
 
 ```python
 ...
@@ -82,6 +82,12 @@ MEMORY_MIBS = {
 
 ## Metrics matrix
 
+Legend for tables:
+
+- `Yes` - implemented
+- `N/A` - implemented but not available on this device
+- empty cell - work in progress
+
 ### D-Link switches
 
 | Device              | CPU  | Memory | Fans | Temperatures | DDM  | PoE
@@ -106,12 +112,6 @@ MEMORY_MIBS = {
 | DGS-3420-28SC       |      |        |      |              |      |
 | DXS-1210-12SC       |      |        |      |              |      |
 
-Legend:
-
-- `Yes` - implemented
-- `N/A` - implemented but not available on this device
-- empty cell - work in progress
-
 ### MikroTik
 
 All health sensors as of version 20191210 of MIKROTIK-MIB are implemented.
@@ -123,20 +123,8 @@ All health sensors as of version 20191210 of MIKROTIK-MIB are implemented.
 | SNR-S2985G-8T  |      |        |      |              |      |    
 | SNR-S2985G-24T | Yes  | Yes    | N/A  | N/A          | Yes  | N/A
 
-Legend:
-
-- `Yes` - implemented
-- `N/A` - implemented but not available on this device
-- empty cell - work in progress
-
 ### TP-Link switches
 
 | Device       | CPU  | Memory | Fans | Temperatures | DDM  | PoE
 | :------------| :----| :----- | :--- | :----------- | :--- | :---
 | T1500G-10MPS |      |        |      |              |      |     
-
-Legend:
-
-- `Yes` - implemented
-- `N/A` - implemented but not available on this device
-- empty cell - work in progress
