@@ -53,6 +53,10 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
         result.extend(ddm_sensors)
         fan_sensors = yield self.get_fan_sensors()
         result.extend(fan_sensors)
+        ports_poe_sensors = yield self.get_ports_poe_sensors()
+        result.extend(ports_poe_sensors)
+        system_poe_sensors = yield self.get_system_poe_sensors()
+        result.extend(system_poe_sensors)
         temperature_sensors = yield self.get_temperature_sensors()
         result.extend(temperature_sensors)
         defer.returnValue(result)
@@ -95,12 +99,39 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
                 result.append(self.get_indexed_system_sensor(index, 'sysFanSpeed', Sensor.UNIT_RPM))
         defer.returnValue(result)
 
+    @defer.inlineCallbacks
+    def get_ports_poe_sensors(self):
+        self._logger.debug(here(self))
+        result = []
+        columns = yield self.retrieve_columns([
+            'poePortIndex',
+            'poePortMaxPower',
+            'poePortCurrentPower',
+            'poePortCurrentCurrent',
+            'poePortCurrentVoltage'
+        ])
+        if columns:
+            for _, item in columns.items():
+                port = item.get('poePortIndex')
+                result.append(self.get_port_sensor(port, 'poePortMaxPower', Sensor.UNIT_WATTS))
+                result.append(self.get_port_sensor(port, 'poePortCurrentPower', Sensor.UNIT_WATTS))
+                result.append(self.get_port_sensor(port, 'poePortCurrentCurrent', Sensor.UNIT_AMPERES))
+                result.append(self.get_port_sensor(port, 'poePortCurrentVoltage', Sensor.UNIT_VOLTS_DC))
+        defer.returnValue(result)
+
+    def get_system_poe_sensors(self):
+        self._logger.debug(here(self))
+        result = []
+        result.append(self.get_system_sensor('poeMaxPower', Sensor.UNIT_WATTS))
+        result.append(self.get_system_sensor('poeCurrentPower', Sensor.UNIT_WATTS))
+        return result
+
     def get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('sysTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         result.append(self.get_system_sensor('switchTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
-        defer.returnValue(result)
+        return result
 
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
