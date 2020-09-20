@@ -84,7 +84,7 @@ MEMORY_MIBS = {
 
 Legend for tables:
 
-- `Yes` - implemented
+- `Yes` - implemented and verified
 - `N/A` - implemented but not available on this device
 - empty cell - work in progress
 
@@ -102,9 +102,7 @@ Legend for tables:
 | DGS-1210-10P/ME/B1  |      |        |      |              |      |
 | DGS-1210-28/ME/B1   |      |        |      |              |      |
 | DGS-1210-28XS/ME/B1 |      |        |      |              |      |
-| DGS-1210-52/ME/B1   |      |        |      |              |      |
-| DGS-1210-52/ME/B1   |      |        |      |              |      |
-| DGS-1210-52/ME/B1   |      |        |      |              |      |
+| DGS-1210-52/ME/B1   |      |        | Yes  | Yes          |      |
 | DGS-1510-28X/ME     |      |        |      |              |      |
 | DGS-1510-28XS/ME    |      |        |      |              |      |
 | DGS-3000-28XS       |      |        |      |              |      |
