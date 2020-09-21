@@ -1,0 +1,10 @@
+112,113c112,117
+<     headers = [('Sysname', 'sysname'),
+<                ('IP', 'ip')]
+---
+>     headers = [
+>         ('Sysname', 'sysname'),
+>         ('IP', 'ip'),
+>         ('Vendor', 'type.vendor'),
+>         ('Type', 'type.name')
+>     ]
