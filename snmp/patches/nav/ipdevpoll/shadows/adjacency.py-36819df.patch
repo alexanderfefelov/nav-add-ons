@@ -1,0 +1,2 @@
+215a216
+>             setattr(self, 'remote_name', getattr(self, 'remote_name', None).replace('\x00', ''))  # Fix https://github.com/alexanderfefelov/nav-add-ons/issues/4
