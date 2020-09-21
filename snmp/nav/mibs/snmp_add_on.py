@@ -21,6 +21,27 @@ class SnmpAddOn:
         )
         return result
 
+    def get_double_indexed_system_sensor(self, index1, index2, sensor_name,
+                                         unit_of_measurement, precision=0, scale=None,
+                                         minimum=0, maximum=100):
+        module_name = self.get_module_name()
+        oid = '{}.{}.{}'.format(str(self.nodes[sensor_name].oid), str(index1), str(index2))
+        internal_name = '{}.{}.{}'.format(sensor_name, str(index1), str(index2))
+        description = internal_name
+        result = dict(
+            mib=module_name,
+            oid=oid,
+            name=internal_name,
+            internal_name=internal_name,
+            description=description,
+            unit_of_measurement=unit_of_measurement,
+            precision=precision,
+            scale=scale,
+            minimum=minimum,
+            maximum=maximum
+        )
+        return result
+
     def get_system_sensor(self, sensor_name,
                           unit_of_measurement, precision=0, scale=None,
                           minimum=0, maximum=100):

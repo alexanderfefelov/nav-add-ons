@@ -79,7 +79,7 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisRXPower', Sensor.UNIT_DBM))
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisTXPower', Sensor.UNIT_DBM))
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisVoltage', Sensor.UNIT_VOLTS_DC))
-                result.append(self.get_port_sensor(port, 'ddmDiagnosisTemperature', Sensor.UNIT_CELSIUS))
+                result.append(self.get_port_sensor(port, 'ddmDiagnosisTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
                 result.append(self.get_port_sensor(port, 'ddmDiagnosisBias', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
         defer.returnValue(result)
 

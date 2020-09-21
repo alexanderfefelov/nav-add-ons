@@ -10,11 +10,11 @@ class DLink_Equipment_Mib(MibRetriever, DLink):
 
     def get_fan_sensors(self):
         self._logger.debug(here(self))
-        return self._get_fan_sensors()
+        return self._get_fan_sensors_old()
 
     def get_temperature_sensors(self):
         self._logger.debug(here(self))
-        return self._get_temperature_sensors()
+        return self._get_temperature_sensors_old()
 
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,

@@ -10,6 +10,7 @@ class DLink(SnmpAddOn):
     def is_supported(self):
         self._logger.debug(here(self))
         reply = yield self.get_next(self.SUPPORTED_ROOT)
+        self._logger.debug('{}: {}'.format(here(self), bool(reply)))
         defer.returnValue(bool(reply))
 
     @defer.inlineCallbacks
@@ -91,7 +92,7 @@ class DLink(SnmpAddOn):
                 result.append(self.get_port_sensor(port, 'ddmRxPower', Sensor.UNIT_DBM))
                 result.append(self.get_port_sensor(port, 'ddmTxPower', Sensor.UNIT_DBM))
                 result.append(self.get_port_sensor(port, 'ddmVoltage', Sensor.UNIT_VOLTS_DC))
-                result.append(self.get_port_sensor(port, 'ddmTemperature', Sensor.UNIT_CELSIUS))
+                result.append(self.get_port_sensor(port, 'ddmTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
                 result.append(self.get_port_sensor(port, 'ddmBiasCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
         defer.returnValue(result)
 
@@ -115,54 +116,26 @@ class DLink(SnmpAddOn):
                     result.append(self.get_port_sensor(port, 'swDdmRxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'swDdmTxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'swDdmVoltage', Sensor.UNIT_VOLTS_DC))
-                    result.append(self.get_port_sensor(port, 'swDdmTemperature', Sensor.UNIT_CELSIUS))
+                    result.append(self.get_port_sensor(port, 'swDdmTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
                     result.append(self.get_port_sensor(port, 'swDdmBiasCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
         defer.returnValue(result)
 
     @defer.inlineCallbacks
-    def _get_fan_sensors(self):
+    def _get_fan_sensors_old(self):
         self._logger.debug(here(self))
         result = []
         columns = yield self.retrieve_columns([
             'swFanUnitIndex',
             'swFanID',
-            'swFanNumber',
             'swFanStatus',
             'swFanSpeed'
         ])
         if columns:
-            module_name = self.get_module_name()
             for _, item in columns.items():
                 unit_index = item.get('swFanUnitIndex')
                 fan_id = item.get('swFanID')
-                fan_number = item.get('swFanNumber')
-                oid = str(self.nodes['swFanSpeed'].oid) + str(item.get(0, None))
-                internal_name = 'swFanSpeed.{}/{}/{}'.format(str(unit_index), str(fan_id), str(fan_number))
-                description = 'Fan {}/{}/{} work speed'.format(str(unit_index), str(fan_id), str(fan_number))
-                result.append(dict(
-                    mib=module_name,
-                    oid=oid,
-                    name=internal_name,
-                    internal_name=internal_name,
-                    description=description,
-                    unit_of_measurement=Sensor.UNIT_RPM,
-                    precision=0,
-                    scale=None
-                ))
-
-                oid = str(self.nodes['swFanStatus'].oid) + str(item.get(0, None))
-                internal_name = 'swFanStatus.{}/{}/{}'.format(str(unit_index), str(fan_id), str(fan_number))
-                description = 'Fan {}/{}/{} status'.format(str(unit_index), str(fan_id), str(fan_number))
-                result.append(dict(
-                    mib=module_name,
-                    oid=oid,
-                    name=internal_name,
-                    internal_name=internal_name,
-                    description=description,
-                    unit_of_measurement='',
-                    precision=0,
-                    scale=None
-                ))
+                self.get_double_indexed_system_sensor(unit_index, fan_id, 'swFanStatus', '')
+                self.get_double_indexed_system_sensor(unit_index, fan_id, 'swFanSpeed', Sensor.UNIT_RPM)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -195,7 +168,7 @@ class DLink(SnmpAddOn):
         return result
 
     @defer.inlineCallbacks
-    def _get_temperature_sensors(self):
+    def _get_temperature_sensors_old(self):
         self._logger.debug(here(self))
         result = []
         columns = yield self.retrieve_columns([
@@ -205,7 +178,7 @@ class DLink(SnmpAddOn):
         if columns:
             for _, item in columns.items():
                 index = item.get('swTemperatureUnitIndex')
-                result.append(self.get_indexed_system_sensor(index, 'swTemperatureCurrent', Sensor.UNIT_CELSIUS))
+                result.append(self.get_indexed_system_sensor(index, 'swTemperatureCurrent', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         defer.returnValue(result)
 
 
