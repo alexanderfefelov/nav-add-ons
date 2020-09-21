@@ -5,7 +5,7 @@ class SnmpAddOn:
                                   minimum=0, maximum=100):
         module_name = self.get_module_name()
         oid = str(self.nodes[sensor_name].oid) + '.' + str(index)
-        internal_name = '{}.{}'.format(sensor_name, str(index)) if index > 0 else sensor_name
+        internal_name = '{}.{}'.format(str(index), sensor_name) if index > 0 else sensor_name
         description = internal_name
         result = dict(
             mib=module_name,
@@ -26,7 +26,7 @@ class SnmpAddOn:
                                          minimum=0, maximum=100):
         module_name = self.get_module_name()
         oid = '{}.{}.{}'.format(str(self.nodes[sensor_name].oid), str(index1), str(index2))
-        internal_name = '{}.{}.{}'.format(sensor_name, str(index1), str(index2))
+        internal_name = '{}.{}.{}'.format(str(index1), str(index2), sensor_name)
         description = internal_name
         result = dict(
             mib=module_name,
@@ -55,7 +55,7 @@ class SnmpAddOn:
                         minimum=0, maximum=100):
         module_name = self.get_module_name()
         oid = str(self.nodes[sensor_name].oid) + '.' + str(port)
-        internal_name = '{}.{}'.format(sensor_name, str(port))
+        internal_name = '{}.{}'.format(str(port), sensor_name)
         description = internal_name
         result = dict(
             mib=module_name,
@@ -77,7 +77,7 @@ class SnmpAddOn:
                                 minimum=0, maximum=100):
         module_name = self.get_module_name()
         oid = str(self.nodes[sensor_name].oid) + '.' + str(group) + '.' + str(port)
-        internal_name = '{}.{}.{}'.format(sensor_name, str(group), str(port))
+        internal_name = '{}.{}.{}'.format(str(group), str(port), sensor_name)
         description = internal_name
         result = dict(
             mib=module_name,
