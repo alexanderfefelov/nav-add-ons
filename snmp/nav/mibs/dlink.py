@@ -44,6 +44,8 @@ class DLink(SnmpAddOn):
             result.extend(fan_sensors)
             ports_poe_sensors = yield self.get_ports_poe_sensors()
             result.extend(ports_poe_sensors)
+            power_sensors = yield self.get_power_sensors()
+            result.extend(power_sensors)
             system_poe_sensors = yield self.get_system_poe_sensors()
             result.extend(system_poe_sensors)
             temperature_sensors = yield self.get_temperature_sensors()
@@ -61,6 +63,10 @@ class DLink(SnmpAddOn):
         return []
 
     def get_ports_poe_sensors(self):
+        self._logger.debug(here(self))
+        return []
+
+    def get_power_sensors(self):
         self._logger.debug(here(self))
         return []
 
@@ -156,6 +162,22 @@ class DLink(SnmpAddOn):
                 result.append(self.get_grouped_port_sensor(group, port, 'poePortPower', Sensor.UNIT_WATTS))
                 result.append(self.get_grouped_port_sensor(group, port, 'poePortVoltage', Sensor.UNIT_VOLTS_DC))
                 result.append(self.get_grouped_port_sensor(group, port, 'poePortCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+        defer.returnValue(result)
+
+    @defer.inlineCallbacks
+    def _get_power_sensors_old(self):
+        self._logger.debug(here(self))
+        result = []
+        columns = yield self.retrieve_columns([
+            'swPowerUnitIndex',
+            'swPowerID'
+            'swPowerStatus'
+        ])
+        if columns:
+            for _, item in columns.items():
+                unit_index = item.get('swPowerUnitIndex')
+                power_id = item.get('swPowerID')
+                self.get_double_indexed_system_sensor(unit_index, power_id, 'swPowerStatus', '')
         defer.returnValue(result)
 
     def _get_system_poe_sensors(self):

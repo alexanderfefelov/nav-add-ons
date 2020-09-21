@@ -12,6 +12,10 @@ class DLink_Equipment_Mib(MibRetriever, DLink):
         self._logger.debug(here(self))
         return self._get_fan_sensors_old()
 
+    def get_power_sensors(self):
+        self._logger.debug(here(self))
+        return self._get_power_sensors_old()
+
     def get_temperature_sensors(self):
         self._logger.debug(here(self))
         return self._get_temperature_sensors_old()
