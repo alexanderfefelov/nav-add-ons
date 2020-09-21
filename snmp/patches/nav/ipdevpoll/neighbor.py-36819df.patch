@@ -1,0 +1,2 @@
+170a171
+>         sysname = sysname.replace('\x00', '')  # Fix https://github.com/alexanderfefelov/nav-add-ons/issues/3
