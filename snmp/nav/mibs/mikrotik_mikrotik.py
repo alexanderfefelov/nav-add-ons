@@ -27,7 +27,6 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     def get_fan_sensors(self):
         self._logger.debug(here(self))
         result = []
-        result.append(self.get_system_sensor('mtxrHlActiveFan', ''))
         result.append(self.get_system_sensor('mtxrHlFanSpeed1', Sensor.UNIT_RPM))
         result.append(self.get_system_sensor('mtxrHlFanSpeed2', Sensor.UNIT_RPM))
         return result
