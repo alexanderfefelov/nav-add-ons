@@ -35,3 +35,13 @@
 >     VENDOR_ID_NAG_LLC: [
 >         Nag_Nag_Mib
 >     ],
+131a165,166
+>             except KeyError:
+>                 continue
+133c168,171
+<                 defer.returnValue(load + utilization)
+---
+>                 if load or utilization:
+>                     defer.returnValue(load + utilization)
+>                 else:
+>                     continue
