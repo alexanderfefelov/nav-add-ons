@@ -8,6 +8,7 @@ import inspect
 
 class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('MikroTik_mikrotik_mib')
+    ROOT_OID = 'mikrotikExperimentalModule'
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
@@ -15,30 +16,31 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result = []
         health_sensors = yield self.get_health_sensors()
         result.extend(health_sensors)
-        self._logger.debug(here(self), str(result))
         defer.returnValue(result)
 
     def get_health_sensors(self):
         self._logger.debug(here(self))
         result = []
-        fan_sensors = yield self.get_fan_sensors()
-        result.extend(fan_sensors)
-        power_supply_sensors = yield self.get_power_supply_sensors()
-        result.extend(power_supply_sensors)
-        other_sensors = yield self.get_other_sensors()
-        result.extend(other_sensors)
-        temperature_sensors = yield self.get_temperature_sensors()
-        result.extend(temperature_sensors)
+        is_supported = yield self.is_oid_supported(self.ROOT_OID)
+        if is_supported:
+            fan_sensors = yield self._get_fan_sensors()
+            result.extend(fan_sensors)
+            power_supply_sensors = yield self._get_power_supply_sensors()
+            result.extend(power_supply_sensors)
+            other_sensors = yield self._get_other_sensors()
+            result.extend(other_sensors)
+            temperature_sensors = yield self._get_temperature_sensors()
+            result.extend(temperature_sensors)
         defer.returnValue(result)
 
-    def get_fan_sensors(self):
+    def _get_fan_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlFanSpeed1', Sensor.UNIT_RPM))
         result.append(self.get_system_sensor('mtxrHlFanSpeed2', Sensor.UNIT_RPM))
         return result
 
-    def get_power_supply_sensors(self):
+    def _get_power_supply_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlBackupPowerSupplyState', ''))
@@ -52,13 +54,13 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC, maximum=300))
         return result
 
-    def get_other_sensors(self):
+    def _get_other_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlProcessorFrequency', Sensor.UNIT_HERTZ, scale=Sensor.SCALE_MEGA))
         return result
 
-    def get_temperature_sensors(self):
+    def _get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
