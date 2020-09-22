@@ -17,5 +17,4 @@ class DLink_DES_1210_08_P_BX_Mib(MibRetriever, DLink_DES_1210_XX):
         return self._get_system_poe_sensors()
 
 
-here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
-                                               type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

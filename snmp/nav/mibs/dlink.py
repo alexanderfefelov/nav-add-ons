@@ -170,7 +170,7 @@ class DLink(SnmpAddOn):
         result = []
         columns = yield self.retrieve_columns([
             'swPowerUnitIndex',
-            'swPowerID'
+            'swPowerID',
             'swPowerStatus'
         ])
         if columns:
@@ -204,5 +204,4 @@ class DLink(SnmpAddOn):
         defer.returnValue(result)
 
 
-here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
-                                               type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
