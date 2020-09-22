@@ -21,5 +21,4 @@ class DLink_DGS_1210_10_P_ME_AX_Mib(MibRetriever, DLink_DGS_1210_XX):
         return self._get_system_poe_sensors()
 
 
-here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
-                                               type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

@@ -21,5 +21,4 @@ class DLink_Equipment_Mib(MibRetriever, DLink):
         return self._get_temperature_sensors_old()
 
 
-here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
-                                               type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

@@ -134,5 +134,4 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
         return result
 
 
-here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
-                                               type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

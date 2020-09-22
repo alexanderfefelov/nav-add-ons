@@ -13,6 +13,14 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     def get_all_sensors(self):
         self._logger.debug(here(self))
         result = []
+        health_sensors = yield self.get_health_sensors()
+        result.extend(health_sensors)
+        self._logger.debug(here(self), str(result))
+        defer.returnValue(result)
+
+    def get_health_sensors(self):
+        self._logger.debug(here(self))
+        result = []
         fan_sensors = yield self.get_fan_sensors()
         result.extend(fan_sensors)
         power_supply_sensors = yield self.get_power_supply_sensors()
@@ -21,7 +29,6 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.extend(other_sensors)
         temperature_sensors = yield self.get_temperature_sensors()
         result.extend(temperature_sensors)
-        self._logger.debug(here(self), str(result))
         defer.returnValue(result)
 
     def get_fan_sensors(self):
@@ -62,5 +69,4 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         return result
 
 
-here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno,
-                                               type(this).__name__, inspect.stack()[1].function)
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

@@ -1,16 +1,15 @@
 class SnmpAddOn:
 
-    def get_indexed_system_sensor(self, index, sensor_name,
-                                  unit_of_measurement, precision=0, scale=None,
-                                  minimum=0, maximum=100):
+    def get_indexed_system_sensor(self, index, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
-        oid = str(self.nodes[sensor_name].oid) + '.' + str(index)
-        internal_name = '{}.{}'.format(str(index), sensor_name) if index > 0 else sensor_name
+        oid = '{}.{}'.format(str(self.nodes[mib_object].oid),str(index))
+        internal_name = '{}.{}'.format(str(index), mib_object) if index > 0 else mib_object
+        name = internal_name
         description = internal_name
         result = dict(
             mib=module_name,
             oid=oid,
-            name=internal_name,
+            name=name,
             internal_name=internal_name,
             description=description,
             unit_of_measurement=unit_of_measurement,
@@ -21,17 +20,16 @@ class SnmpAddOn:
         )
         return result
 
-    def get_double_indexed_system_sensor(self, index1, index2, sensor_name,
-                                         unit_of_measurement, precision=0, scale=None,
-                                         minimum=0, maximum=100):
+    def get_double_indexed_system_sensor(self, index1, index2, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
-        oid = '{}.{}.{}'.format(str(self.nodes[sensor_name].oid), str(index1), str(index2))
-        internal_name = '{}.{}.{}'.format(str(index1), str(index2), sensor_name)
+        oid = '{}.{}.{}'.format(str(self.nodes[mib_object].oid), str(index1), str(index2))
+        internal_name = '{}.{}.{}'.format(str(index1), str(index2), mib_object)
+        name = internal_name
         description = internal_name
         result = dict(
             mib=module_name,
             oid=oid,
-            name=internal_name,
+            name=name,
             internal_name=internal_name,
             description=description,
             unit_of_measurement=unit_of_measurement,
@@ -42,26 +40,21 @@ class SnmpAddOn:
         )
         return result
 
-    def get_system_sensor(self, sensor_name,
-                          unit_of_measurement, precision=0, scale=None,
-                          minimum=0, maximum=100):
-        result = self.get_indexed_system_sensor(0, sensor_name,
-                                                unit_of_measurement, precision, scale,
-                                                minimum, maximum)
+    def get_system_sensor(self, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
+        result = self.get_indexed_system_sensor(0, mib_object, unit_of_measurement, precision, scale, minimum, maximum)
         return result
 
-    def get_port_sensor(self, port, sensor_name,
-                        unit_of_measurement, precision=0, scale=None,
-                        minimum=0, maximum=100):
+    def get_port_sensor(self, port, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
-        oid = str(self.nodes[sensor_name].oid) + '.' + str(port)
-        internal_name = '{}.{}'.format(str(port), sensor_name)
+        oid = '{}.{}'.format(str(self.nodes[mib_object].oid), str(port))
+        internal_name = '{}.{}'.format(str(port), mib_object)
+        name = internal_name
         description = internal_name
         result = dict(
             mib=module_name,
             oid=oid,
             ifindex=port,
-            name=internal_name,
+            name=name,
             internal_name=internal_name,
             description=description,
             unit_of_measurement=unit_of_measurement,
@@ -72,18 +65,17 @@ class SnmpAddOn:
         )
         return result
 
-    def get_grouped_port_sensor(self, group, port, sensor_name,
-                                unit_of_measurement, precision=0, scale=None,
-                                minimum=0, maximum=100):
+    def get_grouped_port_sensor(self, group, port, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
-        oid = str(self.nodes[sensor_name].oid) + '.' + str(group) + '.' + str(port)
-        internal_name = '{}.{}.{}'.format(str(group), str(port), sensor_name)
+        oid = '{}.{}.{}'.format(str(self.nodes[mib_object].oid), str(group), str(port))
+        internal_name = '{}.{}.{}'.format(str(group), str(port), mib_object)
+        name = internal_name
         description = internal_name
         result = dict(
             mib=module_name,
             oid=oid,
             ifindex=port,
-            name=internal_name,
+            name=name,
             internal_name=internal_name,
             description=description,
             unit_of_measurement=unit_of_measurement,
