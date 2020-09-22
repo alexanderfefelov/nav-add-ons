@@ -24,6 +24,7 @@ D_LINK_SYSTEMS_INC =
     DLink_Equipment_Mib
 MIKROTIK = MikroTik_Mikrotik_Mib
 NAG_LLC = Nag_Nag_Mib
+ZAO_LIGHT_COMMUNICATION = NetPing_DKSF_60_Mib
 ...
 ```
 
@@ -73,6 +74,10 @@ All `mtxrHealth` sensors as of version 20191210 of [MIKROTIK-MIB](doc/MikroTik_m
 | :--------------| :--- |:----| :----- | :---- |:--- | :----------- | :--- | :---
 | SNR-S2985G-8T  |      |     |        |       |     |              |      |    
 | SNR-S2985G-24T | [NAG-MIB](doc/NAG_SNR_SWITCH_private_2_1_80_mib.tree.txt) | Yes | Yes | | N/A | N/A | Yes | N/A
+
+### NetPing
+
+All `npThermo` sensors as of version 20160114 of [DKSF-60-4-X-X-X](doc/NetPing_DKSF_60_5_2_MB_mib.tree.txt) are implemented.
 
 ### TP-Link switches
 
