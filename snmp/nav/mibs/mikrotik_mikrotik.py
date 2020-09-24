@@ -11,7 +11,7 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     ROOT_OID = 'mikrotikExperimentalModule'
 
     @defer.inlineCallbacks
-    def get_all_sensors(self):
+    def get_all_sensors(self):  # TODO FIXME call self.is_oid_supported(self.ROOT_OID)
         self._logger.debug(here(self))
         result = []
         health_sensors = yield self.get_health_sensors()
@@ -21,17 +21,15 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     def get_health_sensors(self):
         self._logger.debug(here(self))
         result = []
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            fan_sensors = yield self._get_fan_sensors()
-            result.extend(fan_sensors)
-            power_supply_sensors = yield self._get_power_supply_sensors()
-            result.extend(power_supply_sensors)
-            other_sensors = yield self._get_other_sensors()
-            result.extend(other_sensors)
-            temperature_sensors = yield self._get_temperature_sensors()
-            result.extend(temperature_sensors)
-        defer.returnValue(result)
+        fan_sensors = self._get_fan_sensors()
+        result.extend(fan_sensors)
+        power_supply_sensors = self._get_power_supply_sensors()
+        result.extend(power_supply_sensors)
+        other_sensors = self._get_other_sensors()
+        result.extend(other_sensors)
+        temperature_sensors = self._get_temperature_sensors()
+        result.extend(temperature_sensors)
+        return result
 
     def _get_fan_sensors(self):
         self._logger.debug(here(self))
