@@ -8,22 +8,26 @@ Edit the `/etc/nav/ipdevpoll.conf` file:
 [sensors:vendormibs]
 ...
 D_LINK_SYSTEMS_INC =
-    DLink_DES_1210_08_P_BX_Mib
-    DLink_DES_1210_28_P_CX_Mib
-    DLink_DGS_1210_10_ME_AX_Mib
-    DLink_DGS_1210_10_ME_BX_Mib
-    DLink_DGS_1210_10_P_CX_Mib
-    DLink_DGS_1210_10_P_ME_AX_Mib
-    DLink_DGS_1210_10_P_ME_BX_Mib
-    DLink_DGS_1210_12_TS_ME_BX_Mib
-    DLink_DGS_1210_28_ME_AX_Mib
-    DLink_DGS_1210_28_ME_BX_Mib
-    DLink_DGS_1210_28_XS_ME_BX_Mib
-    DLink_DGS_1210_52_ME_BX_Mib
-    DLink_Ddm_Mib
-    DLink_Equipment_Mib
-MIKROTIK = MikroTik_Mikrotik_Mib
-NAG_LLC = Nag_Nag_Mib
+    DES-1210-08P_BX
+    DES-1210-28P_CX
+    DGS-1210-10ME-AX
+    DGS-1210-10ME-BX
+    DGS-1210-10P_CX
+    DGS-1210-10PME-AX
+    DGS-1210-10PME-BX
+    DGS-1210-12TSME-BX
+    DGS-1210-28ME-AX
+    DGS-1210-28ME-BX
+    DGS-1210-28XSME-BX
+    DGS-1210-52ME-BX
+    DDM-MGMT-MIB
+    EQUIPMENT-MIB
+MIKROTIK =
+    MIKROTIK-MIB
+NAG_LLC =
+    NAG-MIB
+ZAO_LIGHT_COMMUNICATION =
+    DKSF-60-4-X-X-X
 ...
 ```
 
@@ -73,6 +77,10 @@ All `mtxrHealth` sensors as of version 20191210 of [MIKROTIK-MIB](doc/MikroTik_m
 | :--------------| :--- |:----| :----- | :---- |:--- | :----------- | :--- | :---
 | SNR-S2985G-8T  |      |     |        |       |     |              |      |    
 | SNR-S2985G-24T | [NAG-MIB](doc/NAG_SNR_SWITCH_private_2_1_80_mib.tree.txt) | Yes | Yes | | N/A | N/A | Yes | N/A
+
+### NetPing
+
+All `npThermo` sensors as of version 20160114 of [DKSF-60-4-X-X-X](doc/NetPing_DKSF_60_5_2_MB_mib.tree.txt) are implemented.
 
 ### TP-Link switches
 

@@ -1,8 +1,19 @@
+from twisted.internet import defer
+import inspect
+
+
 class SnmpAddOn:
+
+    @defer.inlineCallbacks
+    def is_oid_supported(self, oid):
+        self._logger.debug('{}: {}'.format(here(self), oid))
+        reply = yield self.get_next(oid)
+        self._logger.debug('{}: {} -> {}'.format(here(self), oid, bool(reply)))
+        defer.returnValue(bool(reply))
 
     def get_indexed_system_sensor(self, index, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
-        oid = '{}.{}'.format(str(self.nodes[mib_object].oid),str(index))
+        oid = '{}.{}'.format(str(self.nodes[mib_object].oid), str(index))
         internal_name = '{}.{}'.format(str(index), mib_object) if index > 0 else mib_object
         name = internal_name
         description = internal_name
@@ -85,3 +96,6 @@ class SnmpAddOn:
             maximum=maximum
         )
         return result
+
+
+here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
