@@ -21,8 +21,8 @@
               <td>
                 {{ netbox.sysname }}
                 <small>
-                  <a href="http://{{ netbox.sysname }}"><i class="fa fa-globe"></i></a>
-                  <a href="telnet://{{ netbox.sysname }}"><i class="fa fa-terminal"></i></a>
+                  <a href="http://{{ netbox.sysname }}" title="Open in browser"><i class="fa fa-globe"></i></a>
+                  <a href="telnet://{{ netbox.sysname }}" title="Open with telnet"><i class="fa fa-terminal"></i></a>
                 </small>
                 <button class="table-button secondary right"
                         data-reveal-id="dns-modal"
@@ -138,8 +138,8 @@
               <td><a href="{% url 'ipdevinfo-details-by-addr' netbox.ip %}">
                 {{ netbox.ip }}</a>
                 <small>
-                  <a href="http://{{ netbox.ip }}"><i class="fa fa-globe"></i></a>
-                  <a href="telnet://{{ netbox.ip }}"><i class="fa fa-terminal"></i></a>
+                  <a href="http://{{ netbox.ip }}" title="Open in browser"><i class="fa fa-globe"></i></a>
+                  <a href="telnet://{{ netbox.ip }}" title="Open with telnet"><i class="fa fa-terminal"></i></a>
                 </small>
               </td>
             </tr>
