@@ -49,7 +49,7 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.append(self.get_system_sensor('mtxrHlPowerSupplyState', ''))
         result.append(self.get_system_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_AC, maximum=300))
+        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_DC, 1, maximum=42))
         return result
 
     def _get_other_sensors(self):
