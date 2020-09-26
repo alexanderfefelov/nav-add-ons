@@ -41,30 +41,5 @@
   <div class="float-clear"></div>
 
 {% else %}
-
-  {# There are no sensors in this room #}
-  <div class="alert-box">
-    {% if netboxes %}
-
-      <p>We could not find any IP devices in the <em>environment category</em> with environment sensors in this room.</p>
-
-      {% if netboxes %}
-        <p>The following IP devices with category ENV are in this room:</p>
-        <ul>
-          {% for netbox in netboxes %}
-            <li>
-              <a href="{{ netbox.get_absolute_url }}" title="See this device in IpDeviceInfo">
-                {{ netbox }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-
-    {% else %}
-
-      There are no sensors in this room
-
-    {% endif %}
-  </div>
+  <div class="alert-box">There are no sensors in this room</div>
 {% endif %}

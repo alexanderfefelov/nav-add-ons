@@ -431,7 +431,7 @@
                 {% for job in jobs|dictsortreversed:'end_time' %}
                   <tr>
                     <td title="{{ job_descriptions|lookup:job.job_name|default:'No description' }}">
-                      {{ job.job_name|capfirst }}
+                      {{ job.job_name }}
                     </td>
                     <td title="Next run expected at {{ job.end_time|add_interval:job.interval|date:"DATETIME_FORMAT" }}">
                       {{ job.end_time|date:"DATETIME_FORMAT" }}
