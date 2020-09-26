@@ -1,20 +1,20 @@
 {% load info %}
-<thead>
-<tr>
-    <th>Sysname</th>
-    <th>IP address</th>
-    <th>Category</th>
-    <th>Vendor</th>
-    <th>Type</th>
-    <th>Organization</th>
-    <th>Switch ports</th>
-    <th>Router ports</th>
-    <th>Up</th>
-    <th>Week availability</th>
-    <th>Month availability</th>
-</tr>
-</thead>
 {% if netboxes %}
+    <thead>
+        <tr>
+            <th>Sysname</th>
+            <th>IP address</th>
+            <th>Category</th>
+            <th>Vendor</th>
+            <th>Type</th>
+            <th>Organization</th>
+            <th>Switch ports</th>
+            <th>Router ports</th>
+            <th>Up</th>
+            <th>Week availability</th>
+            <th>Month availability</th>
+        </tr>
+    </thead>
     <tbody>
     {% for netbox in netboxes %}
         <tr>
@@ -53,4 +53,6 @@
         </tr>
     {% endfor %}
     </tbody>
+{% else %}
+    <p class="alert-box">There are no netboxes in this room</p>
 {% endif %}

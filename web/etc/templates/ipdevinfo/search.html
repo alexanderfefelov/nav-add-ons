@@ -20,36 +20,28 @@
 
         <thead>
         <tr>
-            <th>#</th>
             <th>Sysname</th>
             <th>IP address</th>
             <th>Vendor</th>
             <th>Type</th>
+            <th>ID</th>
         </tr>
         </thead>
 
         <tbody>
         {% for netbox in netboxes %}
             <tr>
-                <td>{{ forloop.counter }}</td>
                 <td>
                     <a href="{{ netbox.get_absolute_url }}">{{ netbox.sysname }}</a>
-                    <small>
-                        <a href="http://kibana.backpack.test:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!f,value:30000),time:(from:now-2d,to:now))&_a=(columns:!(logsource,message),filters:!(),interval:auto,query:(language:kuery,query:'{{ netbox.sysname }}'),sort:!())" title="Search in Elasticsearch"><i class="fa fa-search"></i></a>
-                        <a href="http://{{ netbox.sysname }}" title="Open in browser"><i class="fa fa-globe"></i></a>
-                        <a href="telnet://{{ netbox.sysname }}" title="Open with telnet"><i class="fa fa-terminal"></i></a>
-                    </small>
+                    {% include 'info/fragments/netbox_sysname_actions.html' %}
                 </td>
                 <td>
                     {{ netbox.ip }}
-                    <small>
-                        <a href="http://kibana.backpack.test:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!f,value:30000),time:(from:now-2d,to:now))&_a=(columns:!(logsource,message),filters:!(),interval:auto,query:(language:kuery,query:'{{ netbox.ip }}'),sort:!())" title="Search in Elasticsearch"><i class="fa fa-search"></i></a>
-                        <a href="http://{{ netbox.ip }}" title="Open in browser"><i class="fa fa-globe"></i></a>
-                        <a href="telnet://{{ netbox.ip }}" title="Open with telnet"><i class="fa fa-terminal"></i></a>
-                    </small>
+                    {% include 'info/fragments/netbox_ip_actions.html' %}
                 </td>
                 <td>{{ netbox.type.vendor }}</td>
                 <td>{{ netbox.type.name }}</td>
+                <td>{{ netbox.id }}</td>
             </tr>
         {% endfor %}
         </tbody>
