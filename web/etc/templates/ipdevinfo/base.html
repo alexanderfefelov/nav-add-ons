@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{# FIXME hardcoded urls #}
+{% block base_header_additional_head %}
+  <script>require(['src/ipdevinfo'])</script>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/nav/ipdevinfo.css"/>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/nav/local_rickshaw.css"/>
+{% endblock %}
+
+{% block base_content %}
+
+  <h4>
+    {% if netbox.deleted_at %}
+      <del>{{ heading }}</del>
+    {% else %}
+      {{ heading }}
+    {% endif %}
+  </h4>
+
+  {% if netbox.deleted_at %}
+    <div class="alert-box warning with-icon">This device was scheduled for deletion at {{ netbox.deleted_at }}</div>
+  {% endif %}
+
+  {% if errors %}
+    <ul class="error">
+      {% for error in errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% block content %}
+  {% endblock %}
+
+{% endblock %}

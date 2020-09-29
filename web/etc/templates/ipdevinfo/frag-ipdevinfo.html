@@ -10,17 +10,12 @@
         <table class="vertitable full-width">
           <tbody>
             <tr>
-              <th>Full sysname</th>
+              <th><sup><small>{{ netbox.id }}</small></sup> Full sysname</th>
               <td>
                 {{ netbox.sysname }}
                 {% include 'info/fragments/netbox_sysname_actions.html' %}
                 <button class="table-button secondary right" data-reveal-id="dns-modal" data-reveal-ajax="{% url 'ipdevinfo-hostinfo' netbox.sysname %}">DNS</button>
               </td>
-            </tr>
-
-            <tr>
-              <th>ID</th>
-              <td>{{ netbox.id }}</td>
             </tr>
 
             {% if netbox.master %}
