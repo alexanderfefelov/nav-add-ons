@@ -14,8 +14,13 @@
               <td>
                 {{ netbox.sysname }}
                 {% include 'info/fragments/netbox_sysname_actions.html' %}
-                <button class="table-button secondary right" data-reveal-id="dns-modal" data-reveal-ajax="{% url 'ipdevinfo-hostinfo' netbox.sysname %}" >DNS</button>
+                <button class="table-button secondary right" data-reveal-id="dns-modal" data-reveal-ajax="{% url 'ipdevinfo-hostinfo' netbox.sysname %}">DNS</button>
               </td>
+            </tr>
+
+            <tr>
+              <th>ID</th>
+              <td>{{ netbox.id }}</td>
             </tr>
 
             {% if netbox.master %}
@@ -63,11 +68,6 @@
             <tr>
               <th>Function</th>
               <td>{{ netbox.get_function|default:"N/A" }}</td>
-            </tr>
-
-            <tr>
-              <th>ID</th>
-              <td>{{ netbox.id }}</td>
             </tr>
 
             <tr>
