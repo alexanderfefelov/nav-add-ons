@@ -33,10 +33,10 @@
 
 {% block content %}
 
-  Back to
-  <a href="{% url 'useradmin-token_list' %}">token list</a>
+  🡄
+  <a href="{% url 'useradmin-token_list' %}">Token list</a>
   {% if object %}
-    | <a href="{% url 'useradmin-token_detail' object.pk %}">token details</a>
+    | <a href="{% url 'useradmin-token_detail' object.pk %}">Token details</a>
   {% endif %}
 
   <div id="form-panel" class="panel white">

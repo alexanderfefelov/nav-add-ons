@@ -1,7 +1,6 @@
 {% extends "useradmin/base.html" %}
 {% load info %}
 
-
 {% block base_header_additional_head %}
   <style>
     #token-list-table .label { cursor: help; margin-bottom: 1px; }
@@ -24,7 +23,6 @@
     });
   </script>
 {% endblock %}
-
 
 {% block content %}
 
@@ -96,12 +94,8 @@
         </table>
 
       {% else %}
-
         {# If there are no tokens, show information about creating one #}
-        <div class="alert-box info">No tokens are issued. Do you want to
-          <a href="{% url 'useradmin-token_create' %}">create one</a>?
-        </div>
-
+        <div class="alert-box info">No tokens are issued. <a href="{% url 'useradmin-token_create' %}">Create one</a></div>
       {% endif %}
 
     </div>  {# .tabcontent #}

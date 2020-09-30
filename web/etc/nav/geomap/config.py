@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # config.py: Configuration file for Geomap.
 #
 # Warning: Despite the name, this file is NOT a Python file.  The
@@ -14,13 +16,13 @@ def variant(normal, "Map with sensitive information"):
         if is_nan(load_out) or capacity == 0:
             ("#666666", "No statistics")
         if load_out/capacity < 0.3:
-            ("#8AE234", "0--30 %")
+            ("#8AE234", "0–30 %")
         if load_out/capacity < 0.6:
-            ("#FCE94F", "30--60 %")
+            ("#FCE94F", "30–60 %")
         if load_out/capacity < 0.9:
-            ("#FCAF3E", "60--90 %")
+            ("#FCAF3E", "60–90 %")
         if True:
-            ("#CC0000", "90--100 %")
+            ("#CC0000", "90–100 %")
 
     def indicator(edge, size, "Link capacity"):
         if capacity <= 2:
@@ -36,9 +38,9 @@ def variant(normal, "Map with sensitive information"):
         if is_nan(load):
             ("#666666", "No statistics")
         if load < 50:
-            ("#8AE234", "0--0.5")
+            ("#8AE234", "0–0.5")
         if load < 100:
-            ("#FCE94F", "0.5--1")
+            ("#FCE94F", "0.5–1")
         if load >= 100:
             ("#CC0000", "> 1")
 
@@ -46,9 +48,9 @@ def variant(normal, "Map with sensitive information"):
         if num_netboxes == 1:
             (4, "1")
         if num_netboxes <= 10:
-            (6, "2--10")
+            (6, "2–10")
         if num_netboxes <= 20:
-            (8, "11--20")
+            (8, "11–20")
         if True:
             (10, "> 20")
 
@@ -62,13 +64,13 @@ def variant(open, "Map with open information"):
         if is_nan(load_out) or capacity == 0:
             ("#666666", "No statistics")
         if load_out/capacity < 0.3:
-            ("#8AE234", "0--30 %")
+            ("#8AE234", "0–30 %")
         if load_out/capacity < 0.6:
-            ("#FCE94F", "30--60 %")
+            ("#FCE94F", "30–60 %")
         if load_out/capacity < 0.9:
-            ("#FCAF3E", "60--90 %")
+            ("#FCAF3E", "60–90 %")
         if True:
-            ("#CC0000", "90--100 %")
+            ("#CC0000", "90–100 %")
 
     def indicator(edge, size, "Link capacity"):
         if capacity <= 2:
@@ -84,9 +86,9 @@ def variant(open, "Map with open information"):
         if is_nan(load):
             ("#666666", "No statistics")
         if load < 50:
-            ("#8AE234", "0--0.5")
+            ("#8AE234", "0–0.5")
         if load < 100:
-            ("#FCE94F", "0.5--1")
+            ("#FCE94F", "0.5–1")
         if load >= 100:
             ("#CC0000", "> 1")
 
@@ -94,8 +96,8 @@ def variant(open, "Map with open information"):
         if num_netboxes == 1:
             (4, "1")
         if num_netboxes <= 10:
-            (6, "2--10")
+            (6, "2–10")
         if num_netboxes <= 20:
-            (8, "11--20")
+            (8, "11–20")
         if True:
             (10, "> 20")
