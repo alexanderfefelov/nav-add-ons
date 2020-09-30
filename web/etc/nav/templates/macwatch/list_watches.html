@@ -1,0 +1,41 @@
+{% extends "macwatch/base.html" %}
+{% load date_and_time %}
+
+{% block content %}
+
+    <a href="/macwatch/add" class="button small">Add MAC watch</a>
+
+    {% if macwatches %}
+        <table class="vertitable">
+            <caption>Current MAC addresses on watch</caption>
+
+            <tr>
+                <th>MAC address</th>
+                <th>Description</th>
+                <th>Added by</th>
+                <th>Created</th>
+                <th>&nbsp;</th>
+            </tr>
+            {% for macwatch in macwatches %}
+
+                <tr>
+                    <td>
+                        <a href="{% query 'machinetracker-mac' mac=macwatch.get_mac_addr days=-1 dns='on' %}">
+                            {{ macwatch.get_mac_addr }}
+                        </a>
+                    </td>
+                    <td>{{ macwatch.description }}</td>
+                    <td>{{ macwatch.userid.name }}</td>
+                    <td>{{ macwatch.created|default_datetime }}</td>
+                    <td>
+                        <a href="/macwatch/delete/{{ macwatch.id }}/" class="button tiny alert">Delete</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="alert-box secondary">No active mac watches</p>
+    {% endif %}
+
+{% endblock %}
