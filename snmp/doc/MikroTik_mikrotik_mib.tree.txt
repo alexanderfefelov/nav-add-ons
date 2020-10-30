@@ -408,13 +408,20 @@
   |  |     |
   |  |     +--mtxrLTEModemEntry(1) [mtxrLTEModemInterfaceIndex]
   |  |        |
-  |  |        +-- --- ObjectIndex mtxrLTEModemInterfaceIndex(1)
-  |  |        +-- r-n Integer32   mtxrLTEModemSignalRSSI(2)
-  |  |        +-- r-n Integer32   mtxrLTEModemSignalRSRQ(3)
-  |  |        +-- r-n Integer32   mtxrLTEModemSignalRSRP(4)
-  |  |        +-- r-n HexInt      mtxrLTEModemCellId(5)
-  |  |        +-- r-n Enumeration mtxrLTEModemAccessTechnology(6)
-  |  |        +-- r-n Integer32   mtxrLTEModemSignalSINR(7)
+  |  |        +-- --- ObjectIndex   mtxrLTEModemInterfaceIndex(1)
+  |  |        +-- r-n Integer32     mtxrLTEModemSignalRSSI(2)
+  |  |        +-- r-n Integer32     mtxrLTEModemSignalRSRQ(3)
+  |  |        +-- r-n Integer32     mtxrLTEModemSignalRSRP(4)
+  |  |        +-- r-n HexInt        mtxrLTEModemCellId(5)
+  |  |        +-- r-n Enumeration   mtxrLTEModemAccessTechnology(6)
+  |  |        +-- r-n Integer32     mtxrLTEModemSignalSINR(7)
+  |  |        +-- r-n Integer32     mtxrLTEModemEnbId(8)
+  |  |        +-- r-n Integer32     mtxrLTEModemSectorId(9)
+  |  |        +-- r-n Integer32     mtxrLTEModemLac(10)
+  |  |        +-- r-n DisplayString mtxrLTEModemIMEI(11)
+  |  |        +-- r-n DisplayString mtxrLTEModemIMSI(12)
+  |  |        +-- r-n DisplayString mtxrLTEModemUICC(13)
+  |  |        +-- r-n DisplayString mtxrLTEModemRAT(14)
   |  |
   |  +--mtxrPartition(17)
   |  |  |
@@ -439,21 +446,53 @@
   |  |        +-- r-n DisplayString mtxrScriptRunOutput(2)
   |  |
   |  +--mtxrOptical(19)
+  |  |  |
+  |  |  +--mtxrOpticalTable(1)
+  |  |     |
+  |  |     +--mtxrOpticalTableEntry(1) [mtxrOpticalIndex]
+  |  |        |
+  |  |        +-- --- ObjectIndex   mtxrOpticalIndex(1)
+  |  |        +-- r-n DisplayString mtxrOpticalName(2)
+  |  |        +-- r-n BoolValue     mtxrOpticalRxLoss(3)
+  |  |        +-- r-n BoolValue     mtxrOpticalTxFault(4)
+  |  |        +-- r-n GDiv100       mtxrOpticalWavelength(5)
+  |  |        +-- r-n Gauge32       mtxrOpticalTemperature(6)
+  |  |        +-- r-n GDiv1000      mtxrOpticalSupplyVoltage(7)
+  |  |        +-- r-n Gauge32       mtxrOpticalTxBiasCurrent(8)
+  |  |        +-- r-n IDiv1000      mtxrOpticalTxPower(9)
+  |  |        +-- r-n IDiv1000      mtxrOpticalRxPower(10)
+  |  |
+  |  +--mtxrIPSec(20)
   |     |
-  |     +--mtxrOpticalTable(1)
+  |     +-- r-n Gauge32   mtxrIkeSACount(1)
+  |     |
+  |     +--mtxrIkeSATable(2)
   |        |
-  |        +--mtxrOpticalTableEntry(1) [mtxrOpticalIndex]
+  |        +--mtxrIkeSATableEntry(1) [mtxrIkeSAIndex]
   |           |
-  |           +-- --- ObjectIndex   mtxrOpticalIndex(1)
-  |           +-- r-n DisplayString mtxrOpticalName(2)
-  |           +-- r-n BoolValue     mtxrOpticalRxLoss(3)
-  |           +-- r-n BoolValue     mtxrOpticalTxFault(4)
-  |           +-- r-n GDiv100       mtxrOpticalWavelength(5)
-  |           +-- r-n Gauge32       mtxrOpticalTemperature(6)
-  |           +-- r-n GDiv1000      mtxrOpticalSupplyVoltage(7)
-  |           +-- r-n Gauge32       mtxrOpticalTxBiasCurrent(8)
-  |           +-- r-n IDiv1000      mtxrOpticalTxPower(9)
-  |           +-- r-n IDiv1000      mtxrOpticalRxPower(10)
+  |           +-- --- ObjectIndex     mtxrIkeSAIndex(1)
+  |           +-- r-n IsakmpCookie    mtxrIkeSAInitiatorCookie(2)
+  |           +-- r-n IsakmpCookie    mtxrIkeSAResponderCookie(3)
+  |           +-- r-n BoolValue       mtxrIkeSAResponder(4)
+  |           +-- r-n BoolValue       mtxrIkeSANatt(5)
+  |           +-- r-n Gauge32         mtxrIkeSAVersion(6)
+  |           +-- r-n Enumeration     mtxrIkeSAState(7)
+  |           +-- r-n TimeTicks       mtxrIkeSAUptime(8)
+  |           +-- r-n TimeTicks       mtxrIkeSASeen(9)
+  |           +-- r-n DisplayString   mtxrIkeSAIdentity(10)
+  |           +-- r-n Gauge32         mtxrIkeSAPh2Count(11)
+  |           +-- r-n InetAddressType mtxrIkeSALocalAddressType(12)
+  |           +-- r-n InetAddress     mtxrIkeSALocalAddress(13)
+  |           +-- r-n InetPortNumber  mtxrIkeSALocalPort(14)
+  |           +-- r-n InetAddressType mtxrIkeSAPeerAddressType(15)
+  |           +-- r-n InetAddress     mtxrIkeSAPeerAddress(16)
+  |           +-- r-n InetPortNumber  mtxrIkeSAPeerPort(17)
+  |           +-- r-n InetAddressType mtxrIkeSADynamicAddressType(18)
+  |           +-- r-n InetAddress     mtxrIkeSADynamicAddress(19)
+  |           +-- r-n Counter64       mtxrIkeSATxBytes(20)
+  |           +-- r-n Counter64       mtxrIkeSARxBytes(21)
+  |           +-- r-n Counter64       mtxrIkeSATxPackets(22)
+  |           +-- r-n Counter64       mtxrIkeSARxPackets(23)
   |
   +--mtXMetaInfo(2)
      |
@@ -470,6 +509,8 @@
         +--mtxrHotspotActiveUserGroup(5)
         |
         +--mtxrOpticalGroup(6)
+        |
+        +--mtxrIkeSAGroup(7)
         |
         +--mtxrScriptGroup(8)
         |
