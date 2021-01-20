@@ -20,7 +20,7 @@ MIB = {
             """""",
         "revisions" : (
             {
-                "date" : "2019-12-10 00:00",
+                "date" : "2020-10-08 00:00",
                 "description" :
                     """""",
             },
@@ -29,6 +29,9 @@ MIB = {
     },
 
     "imports" : (
+        {"module" : "INET-ADDRESS-MIB", "name" : "InetAddressType"},
+        {"module" : "INET-ADDRESS-MIB", "name" : "InetAddress"},
+        {"module" : "INET-ADDRESS-MIB", "name" : "InetPortNumber"},
         {"module" : "SNMPv2-SMI", "name" : "MODULE-IDENTITY"},
         {"module" : "SNMPv2-SMI", "name" : "OBJECT-TYPE"},
         {"module" : "SNMPv2-SMI", "name" : "Integer32"},
@@ -185,6 +188,23 @@ MIB = {
             },
             "description" :
                 """Boolean value.""",
+        },
+        "IsakmpCookie" : {
+            "basetype" : "OctetString",
+            "status" : "current",
+            "ranges" : [
+            {
+                "min" : "16",
+                "max" : "16"
+            },
+            ],
+            "range" : {
+                "min" : "16",
+                "max" : "16"
+            },
+            "format" : "16a",
+            "description" :
+                """ISAKMP cookie string""",
         },
     }, # typedefs
 
@@ -4038,6 +4058,90 @@ with unavailable values set to zero.""",
             "description" :
                 """dB""",
         }, # column
+        "mtxrLTEModemEnbId" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.8",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"", "name" : "Integer32"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrLTEModemSectorId" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.9",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"", "name" : "Integer32"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrLTEModemLac" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.10",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"", "name" : "Integer32"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrLTEModemIMEI" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.11",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-TC", "name" : "DisplayString"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrLTEModemIMSI" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.12",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-TC", "name" : "DisplayString"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrLTEModemUICC" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.13",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-TC", "name" : "DisplayString"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrLTEModemRAT" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.16.1.1.14",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-TC", "name" : "DisplayString"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
         "mtxrPartition" : {
             "nodetype" : "node",
             "moduleName" : "MIKROTIK-MIB",
@@ -4331,6 +4435,336 @@ with unavailable values set to zero.""",
             "units" : "dBm",
             "description" :
                 """""",
+        }, # column
+        "mtxrIPSec" : {
+            "nodetype" : "node",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20",
+        }, # node
+        "mtxrIkeSACount" : {
+            "nodetype" : "scalar",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.1",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Gauge32"},
+            },
+            "access" : "readonly",
+            "description" :
+                """IKE SA count""",
+        }, # scalar
+        "mtxrIkeSATable" : {
+            "nodetype" : "table",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2",
+            "status" : "current",
+            "description" :
+                """IKE SA table""",
+        }, # table
+        "mtxrIkeSATableEntry" : {
+            "nodetype" : "row",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1",
+            "status" : "current",
+            "linkage" : [
+                "mtxrIkeSAIndex",
+            ],
+            "description" :
+                """""",
+        }, # row
+        "mtxrIkeSAIndex" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.1",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"MIKROTIK-MIB", "name" : "ObjectIndex"},
+            },
+            "access" : "noaccess",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSAInitiatorCookie" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.2",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"MIKROTIK-MIB", "name" : "IsakmpCookie"},
+            },
+            "access" : "readonly",
+            "description" :
+                """initiator SPI""",
+        }, # column
+        "mtxrIkeSAResponderCookie" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.3",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"MIKROTIK-MIB", "name" : "IsakmpCookie"},
+            },
+            "access" : "readonly",
+            "description" :
+                """responder SPI""",
+        }, # column
+        "mtxrIkeSAResponder" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.4",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"MIKROTIK-MIB", "name" : "BoolValue"},
+            },
+            "access" : "readonly",
+            "description" :
+                """IKE side""",
+        }, # column
+        "mtxrIkeSANatt" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.5",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"MIKROTIK-MIB", "name" : "BoolValue"},
+            },
+            "access" : "readonly",
+            "description" :
+                """NAT is detected""",
+        }, # column
+        "mtxrIkeSAVersion" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.6",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Gauge32"},
+            },
+            "access" : "readonly",
+            "description" :
+                """protocol version""",
+        }, # column
+        "mtxrIkeSAState" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.7",
+            "status" : "current",
+            "syntax" : {
+                "type" :                 {
+                    "basetype" : "Enumeration",
+                    "exchange" : {
+                        "nodetype" : "namednumber",
+                        "number" : "1"
+                    },
+                    "established" : {
+                        "nodetype" : "namednumber",
+                        "number" : "2"
+                    },
+                    "expired" : {
+                        "nodetype" : "namednumber",
+                        "number" : "3"
+                    },
+                    "eap" : {
+                        "nodetype" : "namednumber",
+                        "number" : "4"
+                    },
+                },
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSAUptime" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.8",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "TimeTicks"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSASeen" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.9",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "TimeTicks"},
+            },
+            "access" : "readonly",
+            "description" :
+                """time elapsed since last valid IKE packet""",
+        }, # column
+        "mtxrIkeSAIdentity" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.10",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-TC", "name" : "DisplayString"},
+            },
+            "access" : "readonly",
+            "description" :
+                """peer identity""",
+        }, # column
+        "mtxrIkeSAPh2Count" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.11",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Gauge32"},
+            },
+            "access" : "readonly",
+            "description" :
+                """total ph2 SA pairs""",
+        }, # column
+        "mtxrIkeSALocalAddressType" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.12",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetAddressType"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSALocalAddress" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.13",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetAddress"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSALocalPort" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.14",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetPortNumber"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSAPeerAddressType" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.15",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetAddressType"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSAPeerAddress" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.16",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetAddress"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSAPeerPort" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.17",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetPortNumber"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSADynamicAddressType" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.18",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetAddressType"},
+            },
+            "access" : "readonly",
+            "description" :
+                """""",
+        }, # column
+        "mtxrIkeSADynamicAddress" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.19",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"INET-ADDRESS-MIB", "name" : "InetAddress"},
+            },
+            "access" : "readonly",
+            "description" :
+                """dynamic address allocated by mode config""",
+        }, # column
+        "mtxrIkeSATxBytes" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.20",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Counter64"},
+            },
+            "access" : "readonly",
+            "description" :
+                """ph2 SA tx bytes""",
+        }, # column
+        "mtxrIkeSARxBytes" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.21",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Counter64"},
+            },
+            "access" : "readonly",
+            "description" :
+                """ph2 SA rx bytes""",
+        }, # column
+        "mtxrIkeSATxPackets" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.22",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Counter64"},
+            },
+            "access" : "readonly",
+            "description" :
+                """ph2 SA tx packets""",
+        }, # column
+        "mtxrIkeSARxPackets" : {
+            "nodetype" : "column",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.1.20.2.1.23",
+            "status" : "current",
+            "syntax" : {
+                "type" : { "module" :"SNMPv2-SMI", "name" : "Counter64"},
+            },
+            "access" : "readonly",
+            "description" :
+                """ph2 SA rx packets""",
         }, # column
         "mtXMetaInfo" : {
             "nodetype" : "node",
@@ -5008,6 +5442,108 @@ with unavailable values set to zero.""",
             "description" :
                 """""",
         }, # group
+        "mtxrIkeSAGroup" : {
+            "nodetype" : "group",
+            "moduleName" : "MIKROTIK-MIB",
+            "oid" : "1.3.6.1.4.1.14988.1.2.1.7",
+            "status" : "current",
+            "members" : {
+                "mtxrIkeSACount" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAInitiatorCookie" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAResponderCookie" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAResponder" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSANatt" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAVersion" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAState" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAUptime" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSASeen" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAIdentity" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAPh2Count" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSALocalAddressType" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSALocalAddress" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSALocalPort" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAPeerAddressType" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAPeerAddress" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSAPeerPort" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSADynamicAddressType" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSADynamicAddress" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSATxBytes" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSARxBytes" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSATxPackets" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrIkeSARxPackets" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+            }, # members
+            "description" :
+                """""",
+        }, # group
         "mtxrScriptGroup" : {
             "nodetype" : "group",
             "moduleName" : "MIKROTIK-MIB",
@@ -5559,6 +6095,34 @@ with unavailable values set to zero.""",
                     "module" : "MIKROTIK-MIB"
                 },
                 "mtxrLTEModemSignalSINR" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemEnbId" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemSectorId" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemLac" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemIMEI" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemIMSI" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemUICC" : {
+                    "nodetype" : "member",
+                    "module" : "MIKROTIK-MIB"
+                },
+                "mtxrLTEModemRAT" : {
                     "nodetype" : "member",
                     "module" : "MIKROTIK-MIB"
                 },
