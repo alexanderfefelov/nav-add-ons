@@ -1,0 +1,14 @@
+283d282
+<         self._strip_null_bytes()  # Fix https://github.com/alexanderfefelov/nav-add-ons/issues/1
+288,298d286
+< 
+<     def _strip_null_bytes(self):  # Fix https://github.com/alexanderfefelov/nav-add-ons/issues/1
+<         """Strips null bytes from several string fields.
+<         As it turns out, some devices like to return these as part of interface names
+<         or descriptions, but we cannot insert those into the database.
+<         """
+<         for field in 'description', 'net_ident':
+<             value = getattr(self, field, None)
+<             if value is not None and '\x00' in value:
+<                 value = value.replace('\x00', '')
+<                 setattr(self, field, value)
