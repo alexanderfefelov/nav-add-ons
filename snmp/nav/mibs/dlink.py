@@ -174,7 +174,7 @@ class DLink(SnmpAddOn):
             result.append(self.get_system_sensor('pethPsePortPowerConsumption', Sensor.UNIT_WATTS))
             result.append(self.get_system_sensor('pethPsePortPowerRemainder', Sensor.UNIT_WATTS))
             result.append(self.get_system_sensor('pethPsePortPowerRatioOfSystemPower', Sensor.UNIT_PERCENT))
-        return result
+        defer.returnValue(result)
 
     @defer.inlineCallbacks
     def get_temperature_sensors_old(self):
