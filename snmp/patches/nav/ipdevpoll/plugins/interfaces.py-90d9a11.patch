@@ -1,0 +1,5 @@
+98c98,99
+<             if row['ifSpeed'] < 4294967295:
+---
+>             if row['ifSpeed'] < 4294967295 \
+>                     and not row['ifSpeed'] == 1410065408:  # Fix https://github.com/alexanderfefelov/nav-add-ons/issues/10
