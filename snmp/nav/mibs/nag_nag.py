@@ -133,7 +133,7 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('sysTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
-        result.append(self.get_system_sensor('switchTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('switchTemperature', Sensor.UNIT_CELSIUS, precision=7, minimum=-20, maximum=120))
         return result
 
 
