@@ -49,7 +49,7 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.append(self.get_system_sensor('mtxrHlPowerSupplyState', ''))
         result.append(self.get_system_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
-        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_DC, 1, maximum=42))
+        result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_DC, precision=1, maximum=42))
         return result
 
     def _get_other_sensors(self):
@@ -61,11 +61,11 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     def _get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
-        result.append(self.get_system_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
-        result.append(self.get_system_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
-        result.append(self.get_system_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
-        result.append(self.get_system_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
-        result.append(self.get_system_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, 1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlBoardTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlCpuTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
+        result.append(self.get_system_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
         return result
 
 
