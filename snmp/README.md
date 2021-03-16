@@ -67,6 +67,11 @@ Legend for tables:
 | DGS-3420-28SC       |      |      |        |       |      |              |      |
 | DXS-1210-12SC       |      |      |        |       |      |              |      |
 
+### Extreme Networks
+
+- [EXTREME-SOFTWARE-MONITOR-MIB](doc/Extreme_Networks_EXTREME_SOFTWARE_MONITOR_MIB_mib.tree.txt)
+- [EXTREME-SYSTEM-MIB](doc/Extreme_Networks_EXTREME_SYSTEM_MIB_mib.tree.txt)
+
 ### MikroTik
 
 All `mtxrHealth` sensors as of version 20191210 of [MIKROTIK-MIB](doc/MikroTik_mikrotik_mib.tree.txt) are implemented.

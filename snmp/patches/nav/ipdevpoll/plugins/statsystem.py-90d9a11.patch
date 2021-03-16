@@ -36,14 +36,17 @@
 >     VENDOR_ID_NAG_LLC: [
 >         Nag_Nag_Mib
 >     ],
-62a98,100
+62a98,103
+>     VENDOR_ID_EXTREME_NETWORKS: [
+>         Extreme_Networks_Software_Monitor_Mib
+>     ],
 >     VENDOR_ID_NAG_LLC: [
 >         Nag_Nag_Mib
 >     ],
-131a170,171
+131a173,174
 >             except KeyError:
 >                 continue
-133c173,176
+133c176,179
 <                 defer.returnValue(load + utilization)
 ---
 >                 if load or utilization:
