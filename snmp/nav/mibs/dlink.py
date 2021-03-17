@@ -25,7 +25,7 @@ class DLink(SnmpAddOn):
                     (5, utilization_5_min)
                 ]
             })
-            defer.returnValue(result)
+        defer.returnValue(result)
 
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
@@ -49,7 +49,7 @@ class DLink(SnmpAddOn):
             result.extend(system_poe_sensors)
             temperature_sensors = yield getattr(self, self.GET_TEMPERATURE_SENSORS)()
             result.extend(temperature_sensors)
-            defer.returnValue(result)
+        defer.returnValue(result)
 
     def empty(self):
         self._logger.debug(here(self))
