@@ -22,6 +22,8 @@ D_LINK_SYSTEMS_INC =
     DGS-1210-52ME-BX
     DDM-MGMT-MIB
     EQUIPMENT-MIB
+VENDOR_ID_EXTREME_NETWORKS =
+    EXTREME-SYSTEM-MIB
 MIKROTIK =
     MIKROTIK-MIB
 NAG_LLC =
@@ -31,7 +33,7 @@ ZAO_LIGHT_COMMUNICATION =
 ...
 ```
 
-Apply the [statsystem.py-36819df.patch](patches/nav/ipdevpoll/plugins/statsystem.py-36819df.patch) if you want to obtain the CPU load metrics.
+Apply the [statsystem.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/statsystem.py-90d9a11.patch) if you want to obtain the CPU load metrics.
 
 ## Metrics matrix
 
@@ -69,8 +71,9 @@ Legend for tables:
 
 ### Extreme Networks
 
-- [EXTREME-SOFTWARE-MONITOR-MIB](doc/Extreme_Networks_EXTREME_SOFTWARE_MONITOR_MIB_mib.tree.txt)
-- [EXTREME-SYSTEM-MIB](doc/Extreme_Networks_EXTREME_SYSTEM_MIB_mib.tree.txt)
+CPU and memory metrics as of version 20191206 of [EXTREME-SOFTWARE-MONITOR-MIB](doc/Extreme_Networks_EXTREME_SOFTWARE_MONITOR_MIB_mib.tree.txt) are implemented.
+
+[EXTREME-SYSTEM-MIB](doc/Extreme_Networks_EXTREME_SYSTEM_MIB_mib.tree.txt)
 
 ### MikroTik
 
