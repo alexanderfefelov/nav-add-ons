@@ -18,6 +18,8 @@ class NetPing_DKSF_60_Mib(MibRetriever, SnmpAddOn):
         if is_supported:
             temperature_sensors = yield self._get_temperature_sensors()
             result.extend(temperature_sensors)
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 

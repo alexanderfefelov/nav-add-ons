@@ -27,6 +27,8 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
                         (1, item.get('extremeCpuMonitorSystemUtilization1min')),
                         (5, item.get('extremeCpuMonitorSystemUtilization5mins'))
                     ]
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     def get_cpu_utilization(self):
@@ -51,6 +53,8 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
                     free = int(item.get('extremeMemoryMonitorSystemFree')) * 1024
                     used = total - free
                     result[str(slot_id)] = (used, free)
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
 

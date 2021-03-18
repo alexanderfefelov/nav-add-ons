@@ -49,6 +49,8 @@ class DLink(SnmpAddOn):
             result.extend(system_poe_sensors)
             temperature_sensors = yield getattr(self, self.GET_TEMPERATURE_SENSORS)()
             result.extend(temperature_sensors)
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
@@ -78,6 +80,8 @@ class DLink(SnmpAddOn):
                     result.append(self.get_port_sensor(port, 'ddmVoltage', Sensor.UNIT_VOLTS_DC))
                     result.append(self.get_port_sensor(port, 'ddmTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
                     result.append(self.get_port_sensor(port, 'ddmBiasCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -104,6 +108,8 @@ class DLink(SnmpAddOn):
                         result.append(self.get_port_sensor(port, 'swDdmVoltage', Sensor.UNIT_VOLTS_DC))
                         result.append(self.get_port_sensor(port, 'swDdmTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
                         result.append(self.get_port_sensor(port, 'swDdmBiasCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -124,6 +130,8 @@ class DLink(SnmpAddOn):
                     fan_id = item.get('swFanID')
                     self.get_double_indexed_system_sensor(unit_index, fan_id, 'swFanStatus', '')
                     self.get_double_indexed_system_sensor(unit_index, fan_id, 'swFanSpeed', Sensor.UNIT_RPM)
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -146,6 +154,8 @@ class DLink(SnmpAddOn):
                     result.append(self.get_grouped_port_sensor(group, port, 'poePortPower', Sensor.UNIT_WATTS))
                     result.append(self.get_grouped_port_sensor(group, port, 'poePortVoltage', Sensor.UNIT_VOLTS_DC))
                     result.append(self.get_grouped_port_sensor(group, port, 'poePortCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -164,6 +174,8 @@ class DLink(SnmpAddOn):
                     unit_index = item.get('swPowerUnitIndex')
                     power_id = item.get('swPowerID')
                     self.get_double_indexed_system_sensor(unit_index, power_id, 'swPowerStatus', '')
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     def get_system_poe_sensors(self):
@@ -175,6 +187,8 @@ class DLink(SnmpAddOn):
             result.append(self.get_system_sensor('pethPsePortPowerConsumption', Sensor.UNIT_WATTS))
             result.append(self.get_system_sensor('pethPsePortPowerRemainder', Sensor.UNIT_WATTS))
             result.append(self.get_system_sensor('pethPsePortPowerRatioOfSystemPower', Sensor.UNIT_PERCENT))
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -191,6 +205,8 @@ class DLink(SnmpAddOn):
                 for _, item in columns.items():
                     index = item.get('swTemperatureUnitIndex')
                     result.append(self.get_indexed_system_sensor(index, 'swTemperatureCurrent', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         defer.returnValue(result)
 
 
