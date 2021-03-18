@@ -26,11 +26,11 @@ class NetPing_DKSF_60_Mib(MibRetriever, SnmpAddOn):
     def _get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
-        for index in range(1, 9):  # TODO FIXME Use retrieve_columns
-                result.append(self.get_indexed_system_sensor(index, 'npThermoStatus', ''))
-                result.append(self.get_indexed_system_sensor(index, 'npThermoValue', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
-                result.append(self.get_indexed_system_sensor(index, 'npThermoLow', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
-                result.append(self.get_indexed_system_sensor(index, 'npThermoHigh', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+        for index in range(1, 9):
+            result.append(self.get_indexed_system_sensor(index, 'npThermoStatus', ''))
+            result.append(self.get_indexed_system_sensor(index, 'npThermoValue', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+            result.append(self.get_indexed_system_sensor(index, 'npThermoLow', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+            result.append(self.get_indexed_system_sensor(index, 'npThermoHigh', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         return result
 
 
