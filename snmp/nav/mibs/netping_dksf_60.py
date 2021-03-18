@@ -18,6 +18,7 @@ class NetPing_DKSF_60_Mib(MibRetriever, SnmpAddOn):
         if is_supported:
             temperature_sensors = yield self._get_temperature_sensors()
             result.extend(temperature_sensors)
+        self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
     def _get_temperature_sensors(self):

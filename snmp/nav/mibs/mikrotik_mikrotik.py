@@ -16,6 +16,7 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result = []
         health_sensors = yield self.get_health_sensors()
         result.extend(health_sensors)
+        self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
     def get_health_sensors(self):

@@ -49,6 +49,7 @@ class DLink(SnmpAddOn):
             result.extend(system_poe_sensors)
             temperature_sensors = yield getattr(self, self.GET_TEMPERATURE_SENSORS)()
             result.extend(temperature_sensors)
+        self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
     def empty(self):

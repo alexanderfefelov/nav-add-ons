@@ -62,6 +62,7 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
             result.extend(system_poe_sensors)
             temperature_sensors = yield self._get_temperature_sensors()
             result.extend(temperature_sensors)
+        self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
     @defer.inlineCallbacks
