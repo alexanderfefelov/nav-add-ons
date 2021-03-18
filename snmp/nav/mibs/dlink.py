@@ -19,12 +19,10 @@ class DLink(SnmpAddOn):
         utilization_1_min = yield self.get_next('agentCPUutilizationIn1min')
         if utilization_1_min:
             utilization_5_min = yield self.get_next('agentCPUutilizationIn5min')
-            result.update({
-                'cpu': [
-                    (1, utilization_1_min),
-                    (5, utilization_5_min)
-                ]
-            })
+            result['cpu'] = [
+                (1, utilization_1_min),
+                (5, utilization_5_min)
+            ]
         defer.returnValue(result)
 
     def get_cpu_utilization(self):

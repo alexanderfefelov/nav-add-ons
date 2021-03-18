@@ -20,12 +20,10 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
                 idle_5_min = yield self.get_next(cpu + 'CPUFiveMinuteIdle')
                 load_30_sec = 100 - idle_30_sec
                 load_5_min = 100 - idle_5_min
-                result.update({
-                    cpu: [
-                        (1, load_30_sec),
-                        (5, load_5_min)
-                    ]
-                })
+                result[cpu] = [
+                    (1, load_30_sec),
+                    (5, load_5_min)
+                ]
         defer.returnValue(result)
 
     def get_cpu_utilization(self):

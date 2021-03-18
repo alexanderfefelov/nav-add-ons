@@ -11,15 +11,19 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     ROOT_OID = 'mikrotikExperimentalModule'
 
     @defer.inlineCallbacks
-    def get_all_sensors(self):  # TODO FIXME call self.is_oid_supported(self.ROOT_OID)
+    def get_all_sensors(self):
         self._logger.debug(here(self))
         result = []
-        health_sensors = yield self.get_health_sensors()
-        result.extend(health_sensors)
+        is_supported = yield self.is_oid_supported(self.ROOT_OID)
+        if is_supported:
+            health_sensors = yield self._get_health_sensors()
+            result.extend(health_sensors)
+        else:
+            self._logger.warning('%s is not supported', self.ROOT_OID)
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
-    def get_health_sensors(self):
+    def _get_health_sensors(self):
         self._logger.debug(here(self))
         result = []
         fan_sensors = self._get_fan_sensors()
