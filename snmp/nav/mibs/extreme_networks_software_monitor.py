@@ -13,22 +13,18 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
     def get_cpu_loadavg(self):
         self._logger.debug(here(self))
         result = {}
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            columns = yield self.retrieve_columns([
-                'extremeCpuMonitorSystemSlotId',
-                'extremeCpuMonitorSystemUtilization1min',
-                'extremeCpuMonitorSystemUtilization5mins'
-            ])
-            if columns:
-                for _, item in columns.items():
-                    slot_id = item.get('extremeCpuMonitorSystemSlotId')
-                    result[str(slot_id)] = [
-                        (1, item.get('extremeCpuMonitorSystemUtilization1min')),
-                        (5, item.get('extremeCpuMonitorSystemUtilization5mins'))
-                    ]
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        columns = yield self.retrieve_columns([
+            'extremeCpuMonitorSystemSlotId',
+            'extremeCpuMonitorSystemUtilization1min',
+            'extremeCpuMonitorSystemUtilization5mins'
+        ])
+        if columns:
+            for _, item in columns.items():
+                slot_id = item.get('extremeCpuMonitorSystemSlotId')
+                result[str(slot_id)] = [
+                    (1, item.get('extremeCpuMonitorSystemUtilization1min')),
+                    (5, item.get('extremeCpuMonitorSystemUtilization5mins'))
+                ]
         defer.returnValue(result)
 
     def get_cpu_utilization(self):
@@ -39,22 +35,18 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
     def get_memory_usage(self):
         self._logger.debug(here(self))
         result = {}
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            columns = yield self.retrieve_columns([
-                'extremeMemoryMonitorSystemSlotId',
-                'extremeMemoryMonitorSystemTotal',
-                'extremeMemoryMonitorSystemFree'
-            ])
-            if columns:
-                for _, item in columns.items():
-                    slot_id = item.get('extremeMemoryMonitorSystemSlotId')
-                    total = int(item.get('extremeMemoryMonitorSystemTotal')) * 1024
-                    free = int(item.get('extremeMemoryMonitorSystemFree')) * 1024
-                    used = total - free
-                    result[str(slot_id)] = (used, free)
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        columns = yield self.retrieve_columns([
+            'extremeMemoryMonitorSystemSlotId',
+            'extremeMemoryMonitorSystemTotal',
+            'extremeMemoryMonitorSystemFree'
+        ])
+        if columns:
+            for _, item in columns.items():
+                slot_id = item.get('extremeMemoryMonitorSystemSlotId')
+                total = int(item.get('extremeMemoryMonitorSystemTotal')) * 1024
+                free = int(item.get('extremeMemoryMonitorSystemFree')) * 1024
+                used = total - free
+                result[str(slot_id)] = (used, free)
         defer.returnValue(result)
 
 

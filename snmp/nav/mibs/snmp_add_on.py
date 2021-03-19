@@ -4,13 +4,6 @@ import inspect
 
 class SnmpAddOn:
 
-    @defer.inlineCallbacks
-    def is_oid_supported(self, oid):
-        self._logger.debug('{}: {}'.format(here(self), oid))
-        reply = yield self.get_next(oid)
-        self._logger.debug('{}: {} -> {}'.format(here(self), oid, bool(reply)))
-        defer.returnValue(bool(reply))
-
     def get_indexed_system_sensor(self, index, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
         oid = '{}.{}'.format(str(self.nodes[mib_object].oid), str(index))

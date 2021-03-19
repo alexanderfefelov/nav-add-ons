@@ -14,12 +14,8 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     def get_all_sensors(self):
         self._logger.debug(here(self))
         result = []
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            health_sensors = yield self._get_health_sensors()
-            result.extend(health_sensors)
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        health_sensors = yield self._get_health_sensors()
+        result.extend(health_sensors)
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 

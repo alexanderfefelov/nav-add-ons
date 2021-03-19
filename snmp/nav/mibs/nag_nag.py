@@ -48,20 +48,16 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
     def get_all_sensors(self):
         self._logger.debug(here(self))
         result = []
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            ddm_sensors = yield self._get_ddm_sensors()
-            result.extend(ddm_sensors)
-            fan_sensors = yield self._get_fan_sensors()
-            result.extend(fan_sensors)
-            ports_poe_sensors = yield self._get_ports_poe_sensors()
-            result.extend(ports_poe_sensors)
-            system_poe_sensors = yield self._get_system_poe_sensors()
-            result.extend(system_poe_sensors)
-            temperature_sensors = yield self._get_temperature_sensors()
-            result.extend(temperature_sensors)
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        ddm_sensors = yield self._get_ddm_sensors()
+        result.extend(ddm_sensors)
+        fan_sensors = yield self._get_fan_sensors()
+        result.extend(fan_sensors)
+        ports_poe_sensors = yield self._get_ports_poe_sensors()
+        result.extend(ports_poe_sensors)
+        system_poe_sensors = yield self._get_system_poe_sensors()
+        result.extend(system_poe_sensors)
+        temperature_sensors = yield self._get_temperature_sensors()
+        result.extend(temperature_sensors)
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 

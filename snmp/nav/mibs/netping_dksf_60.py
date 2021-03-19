@@ -14,13 +14,8 @@ class NetPing_DKSF_60_Mib(MibRetriever, SnmpAddOn):
     def get_all_sensors(self):
         self._logger.debug(here(self))
         result = []
-        is_supported = True  # is_supported = yield self.is_oid_supported(self.ROOT_OID)
-                             # see https://github.com/alexanderfefelov/nav-add-ons/issues/12
-        if is_supported:
-            temperature_sensors = yield self._get_temperature_sensors()
-            result.extend(temperature_sensors)
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        temperature_sensors = yield self._get_temperature_sensors()
+        result.extend(temperature_sensors)
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 

@@ -16,22 +16,14 @@ class DLink_DGS_1210_52_ME_BX_Mib(MibRetriever, DLink_DGS_1210_XX):
     def _get_fan_sensors(self):
         self._logger.debug(here(self))
         result = []
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            result.append(self.get_system_sensor('sysSmartFanStatus', ''))
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        result.append(self.get_system_sensor('sysSmartFanStatus', ''))
         defer.returnValue(result)
 
     @defer.inlineCallbacks
     def _get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
-        is_supported = yield self.is_oid_supported(self.ROOT_OID)
-        if is_supported:
-            result.append(self.get_system_sensor('sysTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
-        else:
-            self._logger.warning('%s is not supported', self.ROOT_OID)
+        result.append(self.get_system_sensor('sysTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         defer.returnValue(result)
 
 
