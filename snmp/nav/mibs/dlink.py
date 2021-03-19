@@ -5,12 +5,12 @@ import inspect
 
 
 class DLink(SnmpAddOn):
-    GET_DDM_SENSORS = 'empty'
-    GET_FAN_SENSORS = 'empty'
-    GET_PORTS_POE_SENSORS = 'empty'
-    GET_POWER_SENSORS = 'empty'
-    GET_SYSTEM_POE_SENSORS = 'empty'
-    GET_TEMPERATURE_SENSORS = 'empty'
+    GET_DDM_SENSORS = 'no_sensors'
+    GET_FAN_SENSORS = 'no_sensors'
+    GET_PORTS_POE_SENSORS = 'no_sensors'
+    GET_POWER_SENSORS = 'no_sensors'
+    GET_SYSTEM_POE_SENSORS = 'no_sensors'
+    GET_TEMPERATURE_SENSORS = 'no_sensors'
 
     @defer.inlineCallbacks
     def get_cpu_loadavg(self):
@@ -25,10 +25,9 @@ class DLink(SnmpAddOn):
             ]
         defer.returnValue(result)
 
-    @defer.inlineCallbacks
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
-        return defer.succeed(None)
+        return None
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
@@ -49,7 +48,7 @@ class DLink(SnmpAddOn):
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
-    def empty(self):
+    def no_sensors(self):
         self._logger.debug(here(self))
         return []
 
@@ -160,7 +159,7 @@ class DLink(SnmpAddOn):
         result.append(self.get_system_sensor('pethPsePortPowerConsumption', Sensor.UNIT_WATTS))
         result.append(self.get_system_sensor('pethPsePortPowerRemainder', Sensor.UNIT_WATTS))
         result.append(self.get_system_sensor('pethPsePortPowerRatioOfSystemPower', Sensor.UNIT_PERCENT))
-        defer.returnValue(result)
+        return result
 
     @defer.inlineCallbacks
     def get_temperature_sensors_old(self):

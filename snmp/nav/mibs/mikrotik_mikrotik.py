@@ -19,7 +19,6 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
-    @defer.inlineCallbacks
     def _get_health_sensors(self):
         self._logger.debug(here(self))
         result = []
@@ -31,17 +30,15 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.extend(other_sensors)
         temperature_sensors = self._get_temperature_sensors()
         result.extend(temperature_sensors)
-        defer.returnValue(result)
+        return result
 
-    @defer.inlineCallbacks
     def _get_fan_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlFanSpeed1', Sensor.UNIT_RPM))
         result.append(self.get_system_sensor('mtxrHlFanSpeed2', Sensor.UNIT_RPM))
-        defer.returnValue(result)
+        return result
 
-    @defer.inlineCallbacks
     def _get_power_supply_sensors(self):
         self._logger.debug(here(self))
         result = []
@@ -54,16 +51,14 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.append(self.get_system_sensor('mtxrHlThreeDotThreeVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlTwelveVoltage', Sensor.UNIT_VOLTS_DC))
         result.append(self.get_system_sensor('mtxrHlVoltage', Sensor.UNIT_VOLTS_DC, precision=1, maximum=42))
-        defer.returnValue(result)
+        return result
 
-    @defer.inlineCallbacks
     def _get_other_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('mtxrHlProcessorFrequency', Sensor.UNIT_HERTZ, scale=Sensor.SCALE_MEGA))
-        defer.returnValue(result)
+        return(result)
 
-    @defer.inlineCallbacks
     def _get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
@@ -72,7 +67,7 @@ class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
         result.append(self.get_system_sensor('mtxrHlProcessorTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
         result.append(self.get_system_sensor('mtxrHlSensorTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
         result.append(self.get_system_sensor('mtxrHlTemperature', Sensor.UNIT_CELSIUS, precision=1, minimum=-20, maximum=120))
-        defer.returnValue(result)
+        return result
 
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
