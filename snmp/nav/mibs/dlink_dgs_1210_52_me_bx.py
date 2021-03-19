@@ -3,6 +3,7 @@ from nav.mibs.mibretriever import MibRetriever
 from nav.models.manage import Sensor
 from nav.smidumps import get_mib
 from twisted.internet import defer
+import inspect
 
 
 class DLink_DGS_1210_52_ME_BX_Mib(MibRetriever, DLink_DGS_1210_XX):

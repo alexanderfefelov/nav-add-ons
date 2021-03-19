@@ -18,6 +18,7 @@ class Extreme_Networks_System_Mib(MibRetriever, SnmpAddOn):
         self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
+    @defer.inlineCallbacks
     def _get_fan_sensors(self):
         self._logger.debug(here(self))
         result = []

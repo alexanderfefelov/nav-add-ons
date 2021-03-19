@@ -26,6 +26,7 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
                 ]
         defer.returnValue(result)
 
+    @defer.inlineCallbacks
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
         return defer.succeed(None)
@@ -119,19 +120,21 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
                 result.append(self.get_port_sensor(port, 'poePortCurrentVoltage', Sensor.UNIT_VOLTS_DC))
         defer.returnValue(result)
 
+    @defer.inlineCallbacks
     def _get_system_poe_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('poeMaxPower', Sensor.UNIT_WATTS))
         result.append(self.get_system_sensor('poeCurrentPower', Sensor.UNIT_WATTS))
-        return result
+        defer.returnValue(result)
 
+    @defer.inlineCallbacks
     def _get_temperature_sensors(self):
         self._logger.debug(here(self))
         result = []
         result.append(self.get_system_sensor('sysTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         result.append(self.get_system_sensor('switchTemperature', Sensor.UNIT_CELSIUS, precision=7, minimum=-20, maximum=120))
-        return result
+        defer.returnValue(result)
 
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)

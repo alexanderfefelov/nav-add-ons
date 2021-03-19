@@ -27,6 +27,7 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
                 ]
         defer.returnValue(result)
 
+    @defer.inlineCallbacks
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
         return defer.succeed(None)
