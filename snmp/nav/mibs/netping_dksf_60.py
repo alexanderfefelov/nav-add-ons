@@ -8,7 +8,7 @@ import inspect
 
 class NetPing_DKSF_60_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('NetPing_DKSF_60_5_2_MB_mib')
-    ROOT_OID = 'lightcom'
+    GUARD_OID = 'lightcom'
 
     @defer.inlineCallbacks
     def get_all_sensors(self):

@@ -66,8 +66,7 @@ class DLink(SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                exists = SnmpAddOn.is_number(item.get('ddmTemperature'))
-                if exists:
+                if self.is_oid_supported('ddmTemperature'):
                     port = item.get('ddmStatusPort')
                     result.append(self.get_port_sensor(port, 'ddmRxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'ddmTxPower', Sensor.UNIT_DBM))
@@ -90,8 +89,7 @@ class DLink(SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                exists = SnmpAddOn.is_number(item.get('swDdmTemperature'))
-                if exists:
+                if self.is_oid_supported('swDdmTemperature'):
                     port = item.get('swDdmPort')
                     result.append(self.get_port_sensor(port, 'swDdmRxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'swDdmTxPower', Sensor.UNIT_DBM))

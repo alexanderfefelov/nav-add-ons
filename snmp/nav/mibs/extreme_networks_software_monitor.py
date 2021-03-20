@@ -7,7 +7,7 @@ import inspect
 
 class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('Extreme_Networks_EXTREME_SOFTWARE_MONITOR_MIB_mib')
-    ROOT_OID = 'extremeSwMonitor'
+    GUARD_OID = 'extremeSwMonitor'
 
     @defer.inlineCallbacks
     def get_cpu_loadavg(self):

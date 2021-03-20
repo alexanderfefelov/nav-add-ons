@@ -8,7 +8,7 @@ import inspect
 
 class MikroTik_Mikrotik_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('MikroTik_mikrotik_mib')
-    ROOT_OID = 'mikrotikExperimentalModule'
+    GUARD_OID = 'mikrotikExperimentalModule'
 
     @defer.inlineCallbacks
     def get_all_sensors(self):

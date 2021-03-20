@@ -8,7 +8,7 @@ import inspect
 
 class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('NAG_SNR_SWITCH_private_2_1_80_mib')
-    ROOT_OID = 'snr'
+    GUARD_OID = 'snr'
 
     @defer.inlineCallbacks
     def get_cpu_loadavg(self):

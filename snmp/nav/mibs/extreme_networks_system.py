@@ -8,7 +8,7 @@ import inspect
 
 class Extreme_Networks_System_Mib(MibRetriever, SnmpAddOn):
     mib = get_mib('Extreme_Networks_EXTREME_SYSTEM_MIB_mib')
-    ROOT_OID = 'extremeSystem'
+    GUARD_OID = 'extremeSystem'
 
     @defer.inlineCallbacks
     def get_all_sensors(self):
