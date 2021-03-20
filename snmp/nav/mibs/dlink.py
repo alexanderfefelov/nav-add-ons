@@ -66,12 +66,14 @@ class DLink(SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                port = item.get('ddmStatusPort')
-                result.append(self.get_port_sensor(port, 'ddmRxPower', Sensor.UNIT_DBM))
-                result.append(self.get_port_sensor(port, 'ddmTxPower', Sensor.UNIT_DBM))
-                result.append(self.get_port_sensor(port, 'ddmVoltage', Sensor.UNIT_VOLTS_DC))
-                result.append(self.get_port_sensor(port, 'ddmTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
-                result.append(self.get_port_sensor(port, 'ddmBiasCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
+                exists = is_number(item.get('ddmTemperature'))
+                if exists:
+                    port = item.get('ddmStatusPort')
+                    result.append(self.get_port_sensor(port, 'ddmRxPower', Sensor.UNIT_DBM))
+                    result.append(self.get_port_sensor(port, 'ddmTxPower', Sensor.UNIT_DBM))
+                    result.append(self.get_port_sensor(port, 'ddmVoltage', Sensor.UNIT_VOLTS_DC))
+                    result.append(self.get_port_sensor(port, 'ddmTemperature', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
+                    result.append(self.get_port_sensor(port, 'ddmBiasCurrent', Sensor.UNIT_AMPERES, scale=Sensor.SCALE_MILLI))
         defer.returnValue(result)
 
     @defer.inlineCallbacks
@@ -79,7 +81,6 @@ class DLink(SnmpAddOn):
         self._logger.debug(here(self))
         result = []
         columns = yield self.retrieve_columns([
-            'swDdmPortState',
             'swDdmPort',
             'swDdmRxPower',
             'swDdmTxPower',
@@ -89,7 +90,8 @@ class DLink(SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                if item.get('swDdmPortState', None) == 1:
+                exists = is_number(item.get('swDdmTemperature'))
+                if exists:
                     port = item.get('swDdmPort')
                     result.append(self.get_port_sensor(port, 'swDdmRxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'swDdmTxPower', Sensor.UNIT_DBM))
@@ -174,6 +176,14 @@ class DLink(SnmpAddOn):
                 index = item.get('swTemperatureUnitIndex')
                 result.append(self.get_indexed_system_sensor(index, 'swTemperatureCurrent', Sensor.UNIT_CELSIUS, minimum=-20, maximum=120))
         defer.returnValue(result)
+
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
