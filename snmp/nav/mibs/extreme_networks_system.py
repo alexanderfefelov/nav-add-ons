@@ -53,7 +53,7 @@ class Extreme_Networks_System_Mib(MibRetriever, SnmpAddOn):
         if columns:
             for _, item in columns.items():
                 index = item.get('extremePowerSupplyNumber')
-                result.append(self.get_indexed_system_sensor(index, 'extremePowerSupplyInputVoltage', Sensor.UNIT_VOLTS_DC))  # FIXME precision? DC or AC?
+                result.append(self.get_indexed_system_sensor(index, 'extremePowerSupplyInputVoltage'))
                 result.append(self.get_indexed_system_sensor(index, 'extremePowerSupplyFan1Speed', Sensor.UNIT_RPM))
                 result.append(self.get_indexed_system_sensor(index, 'extremePowerSupplyFan2Speed', Sensor.UNIT_RPM))
                 result.append(self.get_indexed_system_sensor(index, 'extremePowerSupplyInputPowerUsage', Sensor.UNIT_WATTS))  # FIXME precision?
