@@ -89,5 +89,13 @@ class SnmpAddOn:
         )
         return result
 
+    @staticmethod
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
 
 here = lambda this: 'here: {}:{} {}.{}'.format(inspect.stack()[1].filename, inspect.stack()[1].lineno, type(this).__name__, inspect.stack()[1].function)
