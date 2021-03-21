@@ -71,9 +71,11 @@ Legend for tables:
 
 ### Extreme Networks
 
-| Device              | MIB  | CPU  | Memory | Power | Fans | Temperatures | DDM  | PoE
-| :------------------ | :--- | :--- | :----- | :---- | :--- | :----------- | :--- | :---
-| X670-48x | [EXTREME-SOFTWARE-MONITOR-MIB](doc/Extreme_Networks_EXTREME_SOFTWARE_MONITOR_MIB_mib.tree.txt)<br>[EXTREME-SYSTEM-MIB](doc/Extreme_Networks_EXTREME_SYSTEM_MIB_mib.tree.txt) | Yes | Yes | Yes | Yes | Yes | X | X |
+| Device              | MIB  | CPU  | Memory | Power | Fans | Temperatures | PoE
+| :------------------ | :--- | :--- | :----- | :---- | :--- | :----------- | :---
+| X670-48x | [EXTREME-SOFTWARE-MONITOR-MIB](doc/Extreme_Networks_EXTREME_SOFTWARE_MONITOR_MIB_mib.tree.txt)<br>[EXTREME-SYSTEM-MIB](doc/Extreme_Networks_EXTREME_SYSTEM_MIB_mib.tree.txt) | Yes | Yes | Yes | Yes | Yes | X
+
+There are no DDM metrics available via SNMP.
 
 ### MikroTik
 
