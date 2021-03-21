@@ -1,11 +1,15 @@
 import inspect
+from twisted.internet import defer
 
 
 class SnmpAddOn:
 
-    def is_oid_supported(self, oid):
-        self._logger.debug('{}: {}'.format(here(self), oid))
-        return self.is_number(self.get(oid))
+    @defer.inlineCallbacks
+    def is_mib_object_supported(self, mib_object):
+        oid = str(self.nodes[mib_object].oid) + '.0'
+        self._logger.debug('{}: {} ({})'.format(here(self), mib_object, oid))
+        result = yield self.agent_proxy.get([oid])
+        defer.returnValue(self.is_number(result[oid]))
 
     def get_indexed_system_sensor(self, index, mib_object, unit_of_measurement, precision=0, scale=None, minimum=0, maximum=100):
         module_name = self.get_module_name()
@@ -98,7 +102,7 @@ class SnmpAddOn:
         try:
             float(s)
             return True
-        except ValueError:
+        except (TypeError, ValueError):
             return False
 
 

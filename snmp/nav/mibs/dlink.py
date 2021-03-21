@@ -33,19 +33,21 @@ class DLink(SnmpAddOn):
     def get_all_sensors(self):
         self._logger.debug(here(self))
         result = []
-        ddm_sensors = yield getattr(self, self.GET_DDM_SENSORS)()
-        result.extend(ddm_sensors)
-        fan_sensors = yield getattr(self, self.GET_FAN_SENSORS)()
-        result.extend(fan_sensors)
-        ports_poe_sensors = yield getattr(self, self.GET_PORTS_POE_SENSORS)()
-        result.extend(ports_poe_sensors)
-        power_sensors = yield getattr(self, self.GET_POWER_SENSORS)()
-        result.extend(power_sensors)
-        system_poe_sensors = yield getattr(self, self.GET_SYSTEM_POE_SENSORS)()
-        result.extend(system_poe_sensors)
-        temperature_sensors = yield getattr(self, self.GET_TEMPERATURE_SENSORS)()
-        result.extend(temperature_sensors)
-        self._logger.info('%d sensor(s) detected', len(result))
+        is_supported = yield self.is_mib_object_supported(self.GUARD_OID)
+        if is_supported:
+            ddm_sensors = yield getattr(self, self.GET_DDM_SENSORS)()
+            result.extend(ddm_sensors)
+            fan_sensors = yield getattr(self, self.GET_FAN_SENSORS)()
+            result.extend(fan_sensors)
+            ports_poe_sensors = yield getattr(self, self.GET_PORTS_POE_SENSORS)()
+            result.extend(ports_poe_sensors)
+            power_sensors = yield getattr(self, self.GET_POWER_SENSORS)()
+            result.extend(power_sensors)
+            system_poe_sensors = yield getattr(self, self.GET_SYSTEM_POE_SENSORS)()
+            result.extend(system_poe_sensors)
+            temperature_sensors = yield getattr(self, self.GET_TEMPERATURE_SENSORS)()
+            result.extend(temperature_sensors)
+            self._logger.info('%d sensor(s) detected', len(result))
         defer.returnValue(result)
 
     def no_sensors(self):
@@ -66,7 +68,7 @@ class DLink(SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                if self.is_oid_supported('ddmTemperature'):
+                if SnmpAddOn.is_number(item.get('ddmTemperature')):
                     port = item.get('ddmStatusPort')
                     result.append(self.get_port_sensor(port, 'ddmRxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'ddmTxPower', Sensor.UNIT_DBM))
@@ -89,7 +91,7 @@ class DLink(SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                if self.is_oid_supported('swDdmTemperature'):
+                if SnmpAddOn.is_number(item.get('swDdmTemperature')):
                     port = item.get('swDdmPort')
                     result.append(self.get_port_sensor(port, 'swDdmRxPower', Sensor.UNIT_DBM))
                     result.append(self.get_port_sensor(port, 'swDdmTxPower', Sensor.UNIT_DBM))

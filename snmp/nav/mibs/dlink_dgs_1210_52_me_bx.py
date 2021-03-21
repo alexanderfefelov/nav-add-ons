@@ -7,7 +7,6 @@ import inspect
 
 class DLink_DGS_1210_52_ME_BX_Mib(MibRetriever, DLink_DGS_1210_XX):
     mib = get_mib('D_Link_DGS_1210_52ME_BX_7_02_017_mib')
-    GUARD_OID = 'dgs-1210-52mebx'
     GET_DDM_SENSORS = 'get_ddm_sensors'
     GET_FAN_SENSORS = '_get_fan_sensors'
     GET_TEMPERATURE_SENSORS = '_get_temperature_sensors'

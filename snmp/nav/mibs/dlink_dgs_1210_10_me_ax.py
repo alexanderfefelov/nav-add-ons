@@ -5,5 +5,4 @@ from nav.smidumps import get_mib
 
 class DLink_DGS_1210_10_ME_AX_Mib(MibRetriever, DLink_DGS_1210_XX):
     mib = get_mib('D_Link_DGS_1210_10ME_AX_6_14_001_mib')
-    GUARD_OID = 'dgs-1210-10meax'
     GET_DDM_SENSORS = 'get_ddm_sensors'
