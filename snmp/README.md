@@ -96,4 +96,10 @@ All `npThermo` sensors as of version 20160114 of [DKSF-60-4-X-X-X](doc/NetPing_D
 
 | Device       | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
 | :------------| :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
-| T1500G-10MPS |      |     |        |       |     |              |      |     
+| T1500G-10MPS |      |     |        |       |     |              |      |
+
+### ZyXEL switches
+
+| Device       | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
+| :------------| :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
+| ES-2024A | [ZYXEL-ES2024A-MIB](doc/ZyXEL_390TX3C0_mib.tree.txt) | Yes | Yes | X | X | X | X | X
