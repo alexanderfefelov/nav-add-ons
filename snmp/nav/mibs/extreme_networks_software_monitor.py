@@ -21,7 +21,8 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
         if columns:
             for _, item in columns.items():
                 slot_id = item.get('extremeCpuMonitorSystemSlotId')
-                result[str(slot_id)] = [
+                slot_name = 'slot_%d' % slot_id
+                result[slot_name] = [
                     (1, item.get('extremeCpuMonitorSystemUtilization1min')),
                     (5, item.get('extremeCpuMonitorSystemUtilization5mins'))
                 ]
@@ -43,10 +44,11 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
         if columns:
             for _, item in columns.items():
                 slot_id = item.get('extremeMemoryMonitorSystemSlotId')
+                slot_name = 'slot_%d' % slot_id
                 total = int(item.get('extremeMemoryMonitorSystemTotal')) * 1024
                 free = int(item.get('extremeMemoryMonitorSystemFree')) * 1024
                 used = total - free
-                result[str(slot_id)] = (used, free)
+                result[slot_name] = (used, free)
         defer.returnValue(result)
 
 
