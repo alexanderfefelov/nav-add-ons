@@ -101,7 +101,7 @@ All `npThermo` sensors as of version 20160114 of [DKSF-60-4-X-X-X](doc/NetPing_D
 
 | Device       | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
 | :------------| :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
-| T1500G-10MPS |      |     |        |       |     |              |      |
+| T1500G-10MPS | [TPLINK-SYSMONITOR-MIB](doc/TP_Link_tplink_sysMonitor_mib.tree.txt) | | | | | | X |
 
 ### ZyXEL switches
 
