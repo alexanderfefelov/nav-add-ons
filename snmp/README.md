@@ -89,7 +89,7 @@ All `mtxrHealth` sensors as of version 20191210 of [MIKROTIK-MIB](doc/MikroTik_m
 ### NAG switches
 
 | Device         | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
-| :--------------| :--- |:----| :----- | :---- |:--- | :----------- | :--- | :---
+| :------------- | :--- |:----| :----- | :---- |:--- | :----------- | :--- | :---
 | SNR-S2985G-8T  |      |     |        |       |     |              |      |    
 | SNR-S2985G-24T | [NAG-MIB](doc/NAG_SNR_SWITCH_private_2_1_80_mib.tree.txt) | Yes | Yes | | N/A | N/A | Yes | N/A
 
@@ -100,12 +100,12 @@ All `npThermo` sensors as of version 20160114 of [DKSF-60-4-X-X-X](doc/NetPing_D
 ### TP-Link switches
 
 | Device       | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
-| :------------| :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
-| T1500G-10MPS | [TPLINK-SYSMONITOR-MIB](doc/TP_Link_tplink_sysMonitor_mib.tree.txt) | | | | | | X |
+| :----------- | :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
+| T1500G-10MPS | [TPLINK-SYSMONITOR-MIB](doc/TP_Link_tplink_sysMonitor_mib.tree.txt) | Yes | Yes | X | X | X | X |
 
 ### ZyXEL switches
 
 | Device       | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
-| :------------| :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
+| :----------- | :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
 | ES-2024A | [ZYXEL-ES2024A-MIB](doc/ZyXEL_390TX3C0_mib.tree.txt) | Yes | Yes | X | X | X | X | X
 | MES-5328 | [ZYXEL-MES3528-MIB](doc/ZyXEL_390BHR5C0_mib.tree.txt) | Yes | X | X | X | X | X | X
