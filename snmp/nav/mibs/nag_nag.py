@@ -16,9 +16,9 @@ class Nag_Nag_Mib(MibRetriever, SnmpAddOn):
         result = {}
         for cpu in 'sys', 'switch':
             idle_30_sec = yield self.get_next(cpu + 'CPUThirtySecondIdle')
-            load_30_sec = 100 - idle_30_sec
+            load_30_sec = 100 - idle_30_sec if idle_30_sec else None
             idle_5_min = yield self.get_next(cpu + 'CPUFiveMinuteIdle')
-            load_5_min = 100 - idle_5_min
+            load_5_min = 100 - idle_5_min if idle_5_min else None
             result[cpu] = [
                 (1, load_30_sec),
                 (5, load_5_min)
