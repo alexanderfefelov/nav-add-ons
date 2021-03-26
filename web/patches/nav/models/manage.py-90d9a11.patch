@@ -1,20 +1,20 @@
-946c946
+985c985
 <     id = models.CharField(db_column='roomid', max_length=30, primary_key=True)
 ---
 >     id = models.CharField(db_column='roomid', max_length=300, primary_key=True)
-1012c1012
+1051c1051
 <                           max_length=30, primary_key=True)
 ---
 >                           max_length=300, primary_key=True)
-1046c1046
+1085c1085
 <     id = models.CharField(db_column='orgid', max_length=30, primary_key=True)
 ---
 >     id = models.CharField(db_column='orgid', max_length=300, primary_key=True)
-1217c1217
+1256c1256
 <     id = models.CharField(db_column='vendorid', max_length=15,
 ---
 >     id = models.CharField(db_column='vendorid', max_length=150,
-1473c1473
+1512c1512
 <     id = models.CharField(db_column='usageid', max_length=30, primary_key=True)
 ---
 >     id = models.CharField(db_column='usageid', max_length=300, primary_key=True)
