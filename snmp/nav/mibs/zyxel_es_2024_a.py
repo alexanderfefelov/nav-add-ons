@@ -31,11 +31,11 @@ class ZyXEL_ES_2024_A_Mib(MibRetriever, SnmpAddOn):
         ])
         if columns:
             for _, item in columns.items():
-                pool_name = item.get('sysMemoryPoolName')
+                pool_name = str(item.get('sysMemoryPoolName'))
                 total = int(item.get('sysMemoryPoolTotal'))
                 used = int(item.get('sysMemoryPoolUsed'))
                 free = total - used
-                result[str(pool_name)] = (used, free)
+                result[pool_name] = (used, free)
         defer.returnValue(result)
 
 
