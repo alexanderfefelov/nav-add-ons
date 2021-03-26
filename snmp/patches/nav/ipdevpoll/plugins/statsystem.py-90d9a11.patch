@@ -53,13 +53,17 @@
 >     VENDOR_ID_ZYXEL_COMMUNICATIONS_CORP: [
 >         ZyXEL_ES_2024_A_Mib
 >     ],
-131a183,184
+124a176
+>         result = []
+131a184,185
 >             except KeyError:
 >                 continue
-133c186,189
+133,134c187,191
 <                 defer.returnValue(load + utilization)
+<         defer.returnValue([])
 ---
->                 if load or utilization:
->                     defer.returnValue(load + utilization)
->                 else:
->                     continue
+>                 if load:
+>                     result.extend(load)
+>                 if utilization:
+>                     result.extend(utilization)
+>         defer.returnValue(result)
