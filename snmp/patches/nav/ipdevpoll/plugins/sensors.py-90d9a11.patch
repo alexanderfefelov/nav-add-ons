@@ -1,0 +1,5 @@
+71,72d70
+<                 # Store and jump out on the first MIB that give
+<                 # any results
+76d73
+<                 break

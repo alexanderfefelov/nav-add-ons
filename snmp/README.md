@@ -33,7 +33,12 @@ ZAO_LIGHT_COMMUNICATION =
 ...
 ```
 
-Apply the [statsystem.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/statsystem.py-90d9a11.patch) if you want to obtain the CPU load metrics.
+Apply the patches:
+
+- [sensors.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/sensors.py-90d9a11.patch),
+- [statsystem.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/statsystem.py-90d9a11.patch),
+
+
 
 ## Metrics matrix
 
