@@ -10,7 +10,7 @@ class ZyXEL_MES_3528_Mib(MibRetriever, SnmpAddOn):
 
     def get_cpu_loadavg(self):
         self._logger.debug(here(self))
-        return None
+        return defer.succeed(None)
 
     @defer.inlineCallbacks
     def get_cpu_utilization(self):

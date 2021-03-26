@@ -17,17 +17,16 @@ class DLink(SnmpAddOn):
         self._logger.debug(here(self))
         result = {}
         utilization_1_min = yield self.get_next('agentCPUutilizationIn1min')
-        if utilization_1_min:
-            utilization_5_min = yield self.get_next('agentCPUutilizationIn5min')
-            result['cpu'] = [
-                (1, utilization_1_min),
-                (5, utilization_5_min)
-            ]
+        utilization_5_min = yield self.get_next('agentCPUutilizationIn5min')
+        result['cpu'] = [
+            (1, utilization_1_min),
+            (5, utilization_5_min)
+        ]
         defer.returnValue(result)
 
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
-        return None
+        return defer.succeed(None)
 
     @defer.inlineCallbacks
     def get_all_sensors(self):

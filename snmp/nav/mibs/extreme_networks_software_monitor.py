@@ -22,15 +22,17 @@ class Extreme_Networks_Software_Monitor_Mib(MibRetriever, SnmpAddOn):
             for _, item in columns.items():
                 slot_id = item.get('extremeCpuMonitorSystemSlotId')
                 slot_name = 'slot_%d' % slot_id
+                utilization_1_min = item.get('extremeCpuMonitorSystemUtilization1min')
+                utilization_5_min = item.get('extremeCpuMonitorSystemUtilization5mins')
                 result[slot_name] = [
-                    (1, item.get('extremeCpuMonitorSystemUtilization1min')),
-                    (5, item.get('extremeCpuMonitorSystemUtilization5mins'))
+                    (1, utilization_1_min),
+                    (5, utilization_5_min)
                 ]
         defer.returnValue(result)
 
     def get_cpu_utilization(self):
         self._logger.debug(here(self))
-        return None
+        return defer.succeed(None)
 
     @defer.inlineCallbacks
     def get_memory_usage(self):
