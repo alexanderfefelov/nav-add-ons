@@ -1,4 +1,4 @@
-45a46,59
+45a46,60
 > from nav.mibs.dlink_dgs_1210_10_me_ax import DLink_DGS_1210_10_ME_AX_Mib
 > from nav.mibs.dlink_dgs_1210_10_me_bx import DLink_DGS_1210_10_ME_BX_Mib
 > from nav.mibs.dlink_dgs_1210_10_p_cx import DLink_DGS_1210_10_P_CX_Mib
@@ -13,12 +13,13 @@
 > from nav.mibs.extreme_networks_software_monitor import Extreme_Networks_Software_Monitor_Mib
 > from nav.mibs.nag_nag import Nag_Nag_Mib
 > from nav.mibs.zyxel_es_2024_a import ZyXEL_ES_2024_A_Mib
-46a61,64
+> from nav.mibs.zyxel_mes_3528 import ZyXEL_MES_3528_Mib
+46a62,65
 >                                 VENDOR_ID_D_LINK_SYSTEMS_INC,
 >                                 VENDOR_ID_EXTREME_NETWORKS,
 >                                 VENDOR_ID_NAG_LLC,
 >                                 VENDOR_ID_ZYXEL_COMMUNICATIONS_CORP,
-56a75,96
+56a76,98
 >     VENDOR_ID_D_LINK_SYSTEMS_INC: [
 >         DLink_DGS_1210_10_ME_AX_Mib,
 >         DLink_DGS_1210_10_ME_BX_Mib,
@@ -39,9 +40,10 @@
 >         Nag_Nag_Mib
 >     ],
 >     VENDOR_ID_ZYXEL_COMMUNICATIONS_CORP: [
->         ZyXEL_ES_2024_A_Mib
+>         ZyXEL_ES_2024_A_Mib,
+>         ZyXEL_MES_3528_Mib
 >     ],
-62a103,111
+62a105,113
 >     VENDOR_ID_EXTREME_NETWORKS: [
 >         Extreme_Networks_Software_Monitor_Mib
 >     ],
@@ -51,10 +53,10 @@
 >     VENDOR_ID_ZYXEL_COMMUNICATIONS_CORP: [
 >         ZyXEL_ES_2024_A_Mib
 >     ],
-131a181,182
+131a183,184
 >             except KeyError:
 >                 continue
-133c184,187
+133c186,189
 <                 defer.returnValue(load + utilization)
 ---
 >                 if load or utilization:
