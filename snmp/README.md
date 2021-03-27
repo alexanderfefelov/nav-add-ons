@@ -28,6 +28,8 @@ MIKROTIK =
     MIKROTIK-MIB
 NAG_LLC =
     NAG-MIB
+TP_LINK_TECHNOLOGY_COLTD =
+    TPLINK-POWER-OVER-ETHERNET-MIB
 ZAO_LIGHT_COMMUNICATION =
     DKSF-60-4-X-X-X
 ...
@@ -37,7 +39,6 @@ Apply the patches:
 
 - [sensors.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/sensors.py-90d9a11.patch),
 - [statsystem.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/statsystem.py-90d9a11.patch),
-
 
 
 ## Metrics matrix
@@ -101,7 +102,7 @@ All `npThermo` sensors as of version 20160114 of [DKSF-60-4-X-X-X](doc/NetPing_D
 
 | Device       | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
 | :----------- | :--- | :---| :----- | :---- |:--- | :----------- | :--- | :---
-| T1500G-10MPS | [TPLINK-SYSMONITOR-MIB](doc/TP_Link_tplink_sysMonitor_mib.tree.txt)<br>[TPLINK-POWER-OVER-ETHERNET-MIB](doc/TP_Link_tplink_powerOverEthernet_mib.tree.txt) | Yes | Yes | X | X | X | X |
+| T1500G-10MPS | [TPLINK-SYSMONITOR-MIB](doc/TP_Link_tplink_sysMonitor_mib.tree.txt)<br>[TPLINK-POWER-OVER-ETHERNET-MIB](doc/TP_Link_tplink_powerOverEthernet_mib.tree.txt) | Yes | Yes | X | X | X | X | Yes
 
 ### ZyXEL switches
 
