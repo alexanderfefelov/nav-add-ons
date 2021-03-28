@@ -2,6 +2,10 @@
 
 ## Installation
 
+Copy the [extra code](nav) to the NAV home directory.
+
+Apply the [patches](patches).
+
 Edit the `/etc/nav/ipdevpoll.conf` file:
 
 ```ini
@@ -34,12 +38,6 @@ ZAO_LIGHT_COMMUNICATION =
     DKSF-60-4-X-X-X
 ...
 ```
-
-Apply the patches:
-
-- [sensors.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/sensors.py-90d9a11.patch),
-- [statsystem.py-90d9a11.patch](patches/nav/ipdevpoll/plugins/statsystem.py-90d9a11.patch),
-
 
 ## Metrics matrix
 
