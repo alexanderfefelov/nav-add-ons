@@ -1,0 +1,4 @@
+206c206
+<             iftype=6).order_by("ifindex").extra(select=cam_query)
+---
+>             Q(iftype=6) | Q(iftype=117)).order_by("ifindex").extra(select=cam_query)
