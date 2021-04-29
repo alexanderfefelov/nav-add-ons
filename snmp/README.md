@@ -90,7 +90,7 @@ All `mtxrHealth` sensors as of version 20191210 of [MIKROTIK-MIB](doc/MikroTik_m
 
 | Device         | MIB  | CPU | Memory | Power |Fans | Temperatures | DDM  | PoE
 | :------------- | :--- |:----| :----- | :---- |:--- | :----------- | :--- | :---
-| SNR-S2985G-8T  |      |     |        |       |     |              |      |    
+| SNR-S2985G-8T  |      |     |        |       |     |              |      |
 | SNR-S2985G-24T | [NAG-MIB](doc/NAG_SNR_SWITCH_private_2_1_80_mib.tree.txt) | Yes | Yes | | N/A | N/A | Yes | N/A
 
 ### NetPing
