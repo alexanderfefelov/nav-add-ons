@@ -13,4 +13,5 @@ patch $NAV_HOME/ipdevpoll/plugins/interfaces.py /nav-add-ons/snmp/patches/nav/ip
 patch $NAV_HOME/ipdevpoll/plugins/sensors.py    /nav-add-ons/snmp/patches/nav/ipdevpoll/plugins/sensors.py-$NAV_VERSION.patch
 patch $NAV_HOME/ipdevpoll/plugins/statsystem.py /nav-add-ons/snmp/patches/nav/ipdevpoll/plugins/statsystem.py-$NAV_VERSION.patch
 patch $NAV_HOME/ipdevpoll/shadows/__init__.py   /nav-add-ons/snmp/patches/nav/ipdevpoll/shadows/__init__.py-$NAV_VERSION.patch
+patch $NAV_HOME/mibs/if_mib.py                  /nav-add-ons/snmp/patches/nav/mibs/if_mib.py-$NAV_VERSION.patch
 echo ...done

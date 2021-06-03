@@ -1,0 +1,7 @@
+96c96,99
+<         result = [(h, l) for h, l in status.keys() if h > 0 and l > 0]
+---
+>         try:
+>             result = [(h, l) for h, l in status.keys() if h > 0 and l > 0]
+>         except ValueError:
+>             result = []
