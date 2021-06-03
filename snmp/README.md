@@ -20,6 +20,7 @@ D_LINK_SYSTEMS_INC =
     DGS-1210-10PME-AX
     DGS-1210-10PME-BX
     DGS-1210-12TSME-BX
+    DGS-1210-20ME-BX
     DGS-1210-28ME-AX
     DGS-1210-28ME-BX
     DGS-1210-28XSME-BX
@@ -62,6 +63,7 @@ Legend for tables:
 | DGS-1210-10P/ME/A1  | [DGS-1210-10PME-AX](doc/D_Link_DGS_1210_10PME_AX_6_13_017_mib.tree.txt) | | | | | | |
 | DGS-1210-10P/ME/B1  | [DGS-1210-10PME-BX](doc/D_Link_DGS_1210_10PME_BX_7_02_017_mib.tree.txt) | | | | | | |
 | DGS-1210-12TS/ME/B1 | [DGS-1210-12TSME-BX](doc/D_Link_DGS_1210_12TSME_BX_7_03_001_mib.tree.txt) | | | | | | |
+| DGS-1210-20/ME/B1   | [DGS-1210-20ME-BX](doc/D_Link_DGS_1210_20ME_BX_7_03_001_mib.tree.txt) | | | | | | |
 | DGS-1210-28/ME/A2   | [DGS-1210-28ME-AX](doc/D_Link_DGS_1210_28ME_AX_6_14_001_mib.tree.txt) | | | | | | |
 | DGS-1210-28/ME/B1   | [DGS-1210-28ME-BX](doc/D_Link_DGS_1210_28ME_BX_7_03_001_mib.tree.txt) | | | | | | |
 | DGS-1210-28XS/ME/B1 | [DGS-1210-28XSME-BX](doc/D_Link_DGS_1210_28XSME_BX_7_03_001_mib.tree.txt) | | | | Yes | X | |
